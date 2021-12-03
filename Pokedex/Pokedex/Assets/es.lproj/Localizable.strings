@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Pokedex
+
+  Created by Abraham Abreu on 01/12/21.
+  
+*/
+
+// Views titles.
+"MainViewTitle" = "Pokedex";

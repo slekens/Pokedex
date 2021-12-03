@@ -10,10 +10,16 @@
 		2E11755B275804C9003473C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E11755A275804C9003473C3 /* AppDelegate.m */; };
 		2E11755E275804C9003473C3 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E11755D275804C9003473C3 /* SceneDelegate.m */; };
 		2E117561275804C9003473C3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E117560275804C9003473C3 /* ViewController.m */; };
-		2E117564275804C9003473C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E117562275804C9003473C3 /* Main.storyboard */; };
 		2E117566275804CA003473C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E117565275804CA003473C3 /* Assets.xcassets */; };
 		2E117569275804CA003473C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E117567275804CA003473C3 /* LaunchScreen.storyboard */; };
 		2E11756C275804CA003473C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E11756B275804CA003473C3 /* main.m */; };
+		2E11757427580764003473C3 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E11757327580764003473C3 /* ViewController.xib */; };
+		2E11757A2758355C003473C3 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E1175792758355C003473C3 /* Constants.m */; };
+		2E11757E27583CD9003473C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E11758027583CD9003473C3 /* Localizable.strings */; };
+		2E1175882758443A003473C3 /* WebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E1175872758443A003473C3 /* WebClient.m */; };
+		2E61C9DD27593B03004183D2 /* AFNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 2E61C9DC27593B03004183D2 /* AFNetworking */; };
+		2E632ACB275AAA5C008B794D /* PokemonList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E632ACA275AAA5C008B794D /* PokemonList.m */; };
+		2E632ACE275AD60E008B794D /* Pokemon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E632ACD275AD60E008B794D /* Pokemon.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,11 +30,21 @@
 		2E11755D275804C9003473C3 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		2E11755F275804C9003473C3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		2E117560275804C9003473C3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		2E117563275804C9003473C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2E117565275804CA003473C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E117568275804CA003473C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E11756A275804CA003473C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E11756B275804CA003473C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2E11757327580764003473C3 /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		2E117576275809BB003473C3 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		2E1175792758355C003473C3 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		2E11757F27583CD9003473C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2E11758127583CEA003473C3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2E1175862758443A003473C3 /* WebClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebClient.h; sourceTree = "<group>"; };
+		2E1175872758443A003473C3 /* WebClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebClient.m; sourceTree = "<group>"; };
+		2E632AC9275AAA5C008B794D /* PokemonList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokemonList.h; sourceTree = "<group>"; };
+		2E632ACA275AAA5C008B794D /* PokemonList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PokemonList.m; sourceTree = "<group>"; };
+		2E632ACC275AD60E008B794D /* Pokemon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pokemon.h; sourceTree = "<group>"; };
+		2E632ACD275AD60E008B794D /* Pokemon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pokemon.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E61C9DD27593B03004183D2 /* AFNetworking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,19 +78,84 @@
 		2E117558275804C9003473C3 /* Pokedex */ = {
 			isa = PBXGroup;
 			children = (
-				2E117559275804C9003473C3 /* AppDelegate.h */,
-				2E11755A275804C9003473C3 /* AppDelegate.m */,
-				2E11755C275804C9003473C3 /* SceneDelegate.h */,
-				2E11755D275804C9003473C3 /* SceneDelegate.m */,
-				2E11755F275804C9003473C3 /* ViewController.h */,
-				2E117560275804C9003473C3 /* ViewController.m */,
-				2E117562275804C9003473C3 /* Main.storyboard */,
-				2E117565275804CA003473C3 /* Assets.xcassets */,
+				2E117585275843FA003473C3 /* Models */,
+				2E1175842758434C003473C3 /* DataSource */,
+				2E117582275842AB003473C3 /* Modules */,
+				2E11757B27583C25003473C3 /* Assets */,
+				2E117575275809A5003473C3 /* Utils */,
+				2E11757227580727003473C3 /* Main */,
 				2E117567275804CA003473C3 /* LaunchScreen.storyboard */,
 				2E11756A275804CA003473C3 /* Info.plist */,
 				2E11756B275804CA003473C3 /* main.m */,
 			);
 			path = Pokedex;
+			sourceTree = "<group>";
+		};
+		2E11757227580727003473C3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2E117559275804C9003473C3 /* AppDelegate.h */,
+				2E11755A275804C9003473C3 /* AppDelegate.m */,
+				2E11755C275804C9003473C3 /* SceneDelegate.h */,
+				2E11755D275804C9003473C3 /* SceneDelegate.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		2E117575275809A5003473C3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2E117576275809BB003473C3 /* Constants.h */,
+				2E1175792758355C003473C3 /* Constants.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2E11757B27583C25003473C3 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				2E117565275804CA003473C3 /* Assets.xcassets */,
+				2E11758027583CD9003473C3 /* Localizable.strings */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		2E117582275842AB003473C3 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				2E1175832758430D003473C3 /* PokeList */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		2E1175832758430D003473C3 /* PokeList */ = {
+			isa = PBXGroup;
+			children = (
+				2E11755F275804C9003473C3 /* ViewController.h */,
+				2E117560275804C9003473C3 /* ViewController.m */,
+				2E11757327580764003473C3 /* ViewController.xib */,
+			);
+			path = PokeList;
+			sourceTree = "<group>";
+		};
+		2E1175842758434C003473C3 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				2E1175862758443A003473C3 /* WebClient.h */,
+				2E1175872758443A003473C3 /* WebClient.m */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		2E117585275843FA003473C3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2E632AC9275AAA5C008B794D /* PokemonList.h */,
+				2E632ACA275AAA5C008B794D /* PokemonList.m */,
+				2E632ACC275AD60E008B794D /* Pokemon.h */,
+				2E632ACD275AD60E008B794D /* Pokemon.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -92,6 +174,9 @@
 			dependencies = (
 			);
 			name = Pokedex;
+			packageProductDependencies = (
+				2E61C9DC27593B03004183D2 /* AFNetworking */,
+			);
 			productName = Pokedex;
 			productReference = 2E117556275804C9003473C3 /* Pokedex.app */;
 			productType = "com.apple.product-type.application";
@@ -117,8 +202,12 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 2E11754D275804C9003473C3;
+			packageReferences = (
+				2E61C9DB27593B03004183D2 /* XCRemoteSwiftPackageReference "AFNetworking" */,
+			);
 			productRefGroup = 2E117557275804C9003473C3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,8 +223,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E117569275804CA003473C3 /* LaunchScreen.storyboard in Resources */,
+				2E11757E27583CD9003473C3 /* Localizable.strings in Resources */,
+				2E11757427580764003473C3 /* ViewController.xib in Resources */,
 				2E117566275804CA003473C3 /* Assets.xcassets in Resources */,
-				2E117564275804C9003473C3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,9 +236,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E11757A2758355C003473C3 /* Constants.m in Sources */,
+				2E1175882758443A003473C3 /* WebClient.m in Sources */,
 				2E117561275804C9003473C3 /* ViewController.m in Sources */,
 				2E11755B275804C9003473C3 /* AppDelegate.m in Sources */,
 				2E11756C275804CA003473C3 /* main.m in Sources */,
+				2E632ACE275AD60E008B794D /* Pokemon.m in Sources */,
+				2E632ACB275AAA5C008B794D /* PokemonList.m in Sources */,
 				2E11755E275804C9003473C3 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,20 +250,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2E117562275804C9003473C3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2E117563275804C9003473C3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2E117567275804CA003473C3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2E117568275804CA003473C3 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		2E11758027583CD9003473C3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2E11757F27583CD9003473C3 /* en */,
+				2E11758127583CEA003473C3 /* es */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -179,6 +274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -238,6 +334,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -298,7 +395,6 @@
 				INFOPLIST_FILE = Pokedex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -324,7 +420,6 @@
 				INFOPLIST_FILE = Pokedex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -361,6 +456,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2E61C9DB27593B03004183D2 /* XCRemoteSwiftPackageReference "AFNetworking" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AFNetworking/AFNetworking.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2E61C9DC27593B03004183D2 /* AFNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E61C9DB27593B03004183D2 /* XCRemoteSwiftPackageReference "AFNetworking" */;
+			productName = AFNetworking;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2E11754E275804C9003473C3 /* Project object */;
 }

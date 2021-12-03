@@ -6,9 +6,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WebClient.h"
 
 @interface ViewController : UIViewController
-
-
 @end
 
