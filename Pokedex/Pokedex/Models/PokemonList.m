@@ -9,6 +9,8 @@
 
 @implementation PokemonList
 
+#pragma mark - Initialization.
+
 -(instancetype)initWithNext:(NSString *)next andPrevious:(NSString*)previous andCount:(NSInteger)count andPokemons:(NSMutableArray<Pokemon*>*)pokemonList {
     self = [super init];
     self.previous = previous;

@@ -9,6 +9,7 @@
 
 @implementation WebClient
 
+#pragma mark - Initialization.
 
 -(id)init {
     if (self = [super init]) {
@@ -18,7 +19,9 @@
     return self;
 }
 
--(void)fetchPokemonData:(PokemonCompletionHandler)completionBlock {
+#pragma mark - WS Calls.
+
+-(void)fetchPokemonList:(PokemonCompletionHandler)completionBlock {
     NSURL *url = [NSURL URLWithString: @"https://pokeapi.co/api/v2/pokemon/"];
     NSURLRequest *request = [NSURLRequest requestWithURL: url];
     
@@ -32,29 +35,46 @@
                 NSLog(@"Error: %@", error);
                 completionBlock(nil, error);
             } else {
-                NSLog(@"Response %@, Object: %@", response, responseObject);
-                completionBlock([self parsePokemonData: responseObject], nil);
+                completionBlock([ParsingData parsePokemonDataList: responseObject], nil);
             }
         });
     }];
     [self.dataTask resume];
 }
 
--(PokemonList*)parsePokemonData:(id)responseObject {
-    PokemonList *pokemonList = [[PokemonList alloc]init];
-    if ([responseObject isKindOfClass: [NSDictionary class]]) {
-        pokemonList.previous = responseObject[@"previous"];
-        pokemonList.next = responseObject[@"next"];
-        pokemonList.count = [responseObject[@"count"] integerValue];
-        pokemonList.pokemonList = [NSMutableArray array];
-        if ([responseObject[@"results"] isKindOfClass: [NSArray class]]) {
-            for (NSDictionary* item in responseObject[@"results"]) {
-                Pokemon *pokemon = [[Pokemon alloc]initWithName: item[@"name"] andURL: item[@"url"]];
-                [pokemonList.pokemonList addObject: pokemon];
+-(void)fetchPokemonData:(PokemonList *)pokemonlist andBlock:(PokemonDataCompletionHandler)completionBlock {
+    
+    dispatch_group_t group = dispatch_group_create();
+
+    NSMutableArray <Pokemon*> *pokemonList = [NSMutableArray array];
+    
+    for (Pokemon *pokemon in pokemonlist.pokemonList) {
+
+        dispatch_group_enter(group);
+        
+        NSURL* url = [NSURL URLWithString: pokemon.url];
+        NSURLRequest* request = [NSURLRequest requestWithURL: url];
+        
+        self.dataTask = [self.manager dataTaskWithRequest: request uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
+            NSLog(@"Upload progress %@", uploadProgress);
+        } downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
+            NSLog(@"Download Progress %@", downloadProgress);
+        } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error: %@", error);
+                completionBlock(nil, error);
+            } else {
+                [pokemonList addObject: [ParsingData parsePokemonData: responseObject]];
             }
-        }
+            dispatch_group_leave(group);
+        }];
+        [self.dataTask resume];
     }
-    return pokemonList;
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        NSLog(@"All pokemons get");
+        completionBlock(pokemonList, nil);
+    });
 }
 
 @end

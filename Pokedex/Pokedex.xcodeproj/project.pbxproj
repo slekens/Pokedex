@@ -20,6 +20,9 @@
 		2E61C9DD27593B03004183D2 /* AFNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 2E61C9DC27593B03004183D2 /* AFNetworking */; };
 		2E632ACB275AAA5C008B794D /* PokemonList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E632ACA275AAA5C008B794D /* PokemonList.m */; };
 		2E632ACE275AD60E008B794D /* Pokemon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E632ACD275AD60E008B794D /* Pokemon.m */; };
+		2E9CF1B8276A63DC00E2FFED /* ParsingData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9CF1B7276A63DC00E2FFED /* ParsingData.m */; };
+		2E9CF1BD276AAFC300E2FFED /* PokemonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9CF1BB276AAFC300E2FFED /* PokemonCollectionViewCell.m */; };
+		2E9CF1BE276AAFC300E2FFED /* PokemonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9CF1BC276AAFC300E2FFED /* PokemonCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +48,11 @@
 		2E632ACA275AAA5C008B794D /* PokemonList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PokemonList.m; sourceTree = "<group>"; };
 		2E632ACC275AD60E008B794D /* Pokemon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pokemon.h; sourceTree = "<group>"; };
 		2E632ACD275AD60E008B794D /* Pokemon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pokemon.m; sourceTree = "<group>"; };
+		2E9CF1B6276A63DC00E2FFED /* ParsingData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParsingData.h; sourceTree = "<group>"; };
+		2E9CF1B7276A63DC00E2FFED /* ParsingData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParsingData.m; sourceTree = "<group>"; };
+		2E9CF1BA276AAFC300E2FFED /* PokemonCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokemonCollectionViewCell.h; sourceTree = "<group>"; };
+		2E9CF1BB276AAFC300E2FFED /* PokemonCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PokemonCollectionViewCell.m; sourceTree = "<group>"; };
+		2E9CF1BC276AAFC300E2FFED /* PokemonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PokemonCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +139,7 @@
 		2E1175832758430D003473C3 /* PokeList */ = {
 			isa = PBXGroup;
 			children = (
+				2E9CF1B9276AAFAD00E2FFED /* Cells */,
 				2E11755F275804C9003473C3 /* ViewController.h */,
 				2E117560275804C9003473C3 /* ViewController.m */,
 				2E11757327580764003473C3 /* ViewController.xib */,
@@ -143,6 +152,8 @@
 			children = (
 				2E1175862758443A003473C3 /* WebClient.h */,
 				2E1175872758443A003473C3 /* WebClient.m */,
+				2E9CF1B6276A63DC00E2FFED /* ParsingData.h */,
+				2E9CF1B7276A63DC00E2FFED /* ParsingData.m */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -156,6 +167,16 @@
 				2E632ACD275AD60E008B794D /* Pokemon.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2E9CF1B9276AAFAD00E2FFED /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2E9CF1BA276AAFC300E2FFED /* PokemonCollectionViewCell.h */,
+				2E9CF1BB276AAFC300E2FFED /* PokemonCollectionViewCell.m */,
+				2E9CF1BC276AAFC300E2FFED /* PokemonCollectionViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +246,7 @@
 				2E117569275804CA003473C3 /* LaunchScreen.storyboard in Resources */,
 				2E11757E27583CD9003473C3 /* Localizable.strings in Resources */,
 				2E11757427580764003473C3 /* ViewController.xib in Resources */,
+				2E9CF1BE276AAFC300E2FFED /* PokemonCollectionViewCell.xib in Resources */,
 				2E117566275804CA003473C3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +262,8 @@
 				2E1175882758443A003473C3 /* WebClient.m in Sources */,
 				2E117561275804C9003473C3 /* ViewController.m in Sources */,
 				2E11755B275804C9003473C3 /* AppDelegate.m in Sources */,
+				2E9CF1BD276AAFC300E2FFED /* PokemonCollectionViewCell.m in Sources */,
+				2E9CF1B8276A63DC00E2FFED /* ParsingData.m in Sources */,
 				2E11756C275804CA003473C3 /* main.m in Sources */,
 				2E632ACE275AD60E008B794D /* Pokemon.m in Sources */,
 				2E632ACB275AAA5C008B794D /* PokemonList.m in Sources */,

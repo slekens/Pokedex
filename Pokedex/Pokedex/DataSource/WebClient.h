@@ -8,10 +8,12 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 #import "PokemonList.h"
+#import "ParsingData.h"
 
 @interface WebClient : NSObject
 
 typedef void (^PokemonCompletionHandler)(PokemonList * __nullable pokemon, NSError * __nullable error);
+typedef void (^PokemonDataCompletionHandler)(NSArray <Pokemon *>* __nullable pokemonList, NSError * __nullable error);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-- (void)fetchPokemonData:(PokemonCompletionHandler _Nullable)completionBlock;
+- (void)fetchPokemonList:(PokemonCompletionHandler _Nullable)completionBlock;
+- (void)fetchPokemonData:(PokemonList* _Nonnull)pokemonList andBlock:(PokemonDataCompletionHandler _Nullable)completionBlock;
 
 @end
 
