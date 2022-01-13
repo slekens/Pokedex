@@ -6,7 +6,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFNetworking.h"
 #import "PokemonList.h"
 #import "ParsingData.h"
 
@@ -18,7 +17,7 @@ typedef void (^PokemonDataCompletionHandler)(NSArray <Pokemon *>* __nullable pok
 NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong)NSURLSessionConfiguration *sessionConfiguration;
-@property(nonatomic, strong)AFURLSessionManager *manager;
+@property(nonatomic, strong)NSURLSession *manager;
 @property(nonatomic, strong)NSURLSessionDataTask *dataTask;
 
 NS_ASSUME_NONNULL_END

@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PokemonList : NSObject
 
-@property(nonatomic, copy)NSString *previous;
-@property(nonatomic, copy)NSString *next;
-@property(nonatomic)NSInteger count;
+@property(nonatomic, copy) NSString * _Nullable previous;
+@property(nonatomic, copy) NSString * _Nullable next;
+@property(nonatomic, assign)NSInteger count;
 @property(nonatomic, strong)NSMutableArray<Pokemon*> *pokemonList;
 
 -(instancetype)initWithNext:(NSString *)next andPrevious:(NSString*)previous andCount:(NSInteger)count andPokemons:(NSMutableArray<Pokemon*>*)pokemonList;

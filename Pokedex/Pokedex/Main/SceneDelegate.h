@@ -6,13 +6,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ViewController.h"
+#import "PokemonListViewController.h"
+#import "AppCoordinator.h"
 #import "Constants.h"
 
 @interface SceneDelegate : UIResponder <UIWindowSceneDelegate>
 
-@property (strong, nonatomic) UIWindow * window;
-@property (strong, nonatomic) UIViewController *viewController;
+@property(nonatomic, strong)AppCoordinator *appCoordinator;
+@property(nonatomic, strong)UIWindow * window;
 
 @end
 

@@ -9,6 +9,8 @@
 
 @implementation PokemonList
 
+@synthesize previous, next, count, pokemonList;
+
 #pragma mark - Initialization.
 
 -(instancetype)initWithNext:(NSString *)next andPrevious:(NSString*)previous andCount:(NSInteger)count andPokemons:(NSMutableArray<Pokemon*>*)pokemonList {

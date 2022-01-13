@@ -9,6 +9,8 @@
 
 @implementation Pokemon
 
+@synthesize name, url, baseExperience, height, pokemonId, isDefault, locationEncounters, order, weight, pictures;
+
 #pragma mark - Initialization.
 
 -(instancetype)initWithName:(NSString*)name andURL:(NSString*)url {
@@ -18,7 +20,7 @@
     return self;
 }
 
--(instancetype)initWithAll:(NSString *)name resourceURL:(NSString *)url baseExperience:(NSInteger)experience height:(NSInteger)height pokemonID:(NSInteger)pokemonID isDefault:(BOOL)isDefault locationEncounterResource:(NSString *)locationURL order:(NSInteger)order weight:(NSInteger)weight {
+-(instancetype)initWithAll:(NSString *)name resourceURL:(NSString *)url baseExperience:(NSInteger)experience height:(NSInteger)height pokemonID:(NSInteger)pokemonID isDefault:(BOOL)isDefault locationEncounterResource:(NSString *)locationURL order:(NSInteger)order weight:(NSInteger)weight image:(PokemonImage *)pictures {
     self = [super init];
     self.name = name;
     self.url = url;
@@ -29,6 +31,7 @@
     self.locationEncounters = locationURL;
     self.order = order;
     self.weight = weight;
+    self.pictures = pictures;
     return self;
 }
 

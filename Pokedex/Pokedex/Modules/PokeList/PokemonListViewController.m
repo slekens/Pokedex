@@ -5,13 +5,11 @@
 //  Created by Abraham Abreu on 01/12/21.
 //
 
-#import "ViewController.h"
+#import "PokemonListViewController.h"
 
-@interface ViewController ()
+@implementation PokemonListViewController
 
-@end
-
-@implementation ViewController
+@synthesize flowLayout, collectionView;
 
 #pragma mark - Initialization.
 
@@ -36,7 +34,7 @@
 -(void)setupLayout {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     CGFloat width = [UIScreen mainScreen].bounds.size.width - 20;
-    [self.flowLayout setItemSize: CGSizeMake(width / 3, 110)];
+    [self.flowLayout setItemSize: CGSizeMake(width / 3, 140)];
     [self.flowLayout setScrollDirection: UICollectionViewScrollDirectionVertical];
     self.flowLayout.minimumLineSpacing = 5.0f;
     self.flowLayout.minimumInteritemSpacing = 5.0f;
@@ -81,6 +79,12 @@
 #pragma mark - UIcollection Delegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Pokemon Selected: %ld", indexPath.row);
+}
+
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row + 1 == self.pokemonList.count) {
+        NSLog(@"Call next WS");
+    }
 }
 
 #pragma mark - FlowLayout

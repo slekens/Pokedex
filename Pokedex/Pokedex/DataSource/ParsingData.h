@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "PokemonList.h"
 #import "Pokemon.h"
+#import "PokemonImage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

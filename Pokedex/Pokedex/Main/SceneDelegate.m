@@ -18,11 +18,8 @@
     
     self.window = [[UIWindow alloc]initWithFrame: [[UIScreen mainScreen] bounds]];
     self.window.windowScene = (UIWindowScene*)scene;
-    self.viewController = [[ViewController alloc]initWithNibName: kMainViewName bundle: NSBundle.mainBundle];
-    
-    UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController: self.viewController];
-    self.window.rootViewController = navigationController;
-    [self.window makeKeyAndVisible];
+    self.appCoordinator = [[AppCoordinator alloc]initWithWindow: self.window];
+    [self.appCoordinator start];
 }
 
 

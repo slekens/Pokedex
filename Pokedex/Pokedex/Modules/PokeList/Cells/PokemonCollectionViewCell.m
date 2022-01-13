@@ -9,13 +9,31 @@
 
 @implementation PokemonCollectionViewCell
 
+@synthesize pokemonPicture, pokemonColor, lblName, lblPokemonNumber, firstBackground, pokeBallButton;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.layer.cornerRadius = 5.0;
 }
 
 -(void)configure:(Pokemon *)pokemon {
-    self.backgroundColor = [UIColor systemRedColor];
+    self.backgroundColor = [UIColor clearColor];
+    self.pokemonColor.backgroundColor = [UIColor whiteColor];
+    self.firstBackground.backgroundColor = [UIColor redColor];
+    self.pokeBallButton.backgroundColor = [UIColor blackColor];
+    self.pokeBallButton.layer.cornerRadius = self.pokeBallButton.frame.size.width / 2;
     self.lblName.text = pokemon.name;
+    self.lblPokemonNumber.text = [NSString stringWithFormat: @"#%ld" ,pokemon.pokemonId];
+    [self downloadPicture: pokemon.pictures.officialArtwork];
+}
+
+-(void)downloadPicture:(NSString*)imageURL {
+    [[ImageDownloader sharedImageDownloader]downloadImageWithURL: imageURL andHandler:^(UIImage * _Nullable pokemonSprite, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        }
+        self.pokemonPicture.image = pokemonSprite;
+    }];
 }
 
 @end
