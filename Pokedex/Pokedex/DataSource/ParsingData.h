@@ -6,16 +6,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ServicesProtocol.h"
 #import "PokemonList.h"
 #import "Pokemon.h"
 #import "PokemonImage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ParsingData : NSObject
-
-+(PokemonList*)parsePokemonDataList:(id)responseObject;
-+(Pokemon*)parsePokemonData:(id)responseObject;
+@interface ParsingData : NSObject<PokemonParserProtocol>
 
 @end
 

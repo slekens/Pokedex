@@ -7,14 +7,20 @@
 
 #import <UIKit/UIKit.h>
 #import "WebClient.h"
+#import "PokemonListViewModel.h"
 #import "PokemonCollectionViewCell.h"
 
 @interface PokemonListViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
+NS_ASSUME_NONNULL_BEGIN
+
+
 @property(nonatomic, weak)IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong)IBOutlet UICollectionViewFlowLayout *flowLayout;
 
-@property(nonatomic, copy)NSMutableArray<Pokemon *> *pokemonList;
+@property(nonatomic, strong)PokemonListViewModel *viewModel;
+
+NS_ASSUME_NONNULL_END
 
 @end
 

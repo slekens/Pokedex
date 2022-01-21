@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ImageDownloader.h"
-#import "Pokemon.h"
+#import "PokemonDisplay.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, weak)IBOutlet UIView *firstBackground;
 @property(nonatomic, weak)IBOutlet UIView *pokeBallButton;
 
--(void)configure:(Pokemon *)pokemon;
+-(void)configure:(PokemonDisplay *)pokemon;
 
 @end
 

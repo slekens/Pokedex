@@ -15,15 +15,17 @@
 
 @implementation AppCoordinator
 
+@synthesize pokemonListCoordinator;
+
 -(instancetype)initWithWindow:(UIWindow*)window {
     self = [super init];
     self.window = window;
-    self.pokemonList = [[PokemonListCoordinator alloc]init];
+    self.pokemonListCoordinator = [[PokemonListCoordinator alloc]init];
     return self;
 }
 
 -(UIViewController*)start {
-    UIViewController* pokemonList = [self.pokemonList start];
+    UIViewController* pokemonList = [self.pokemonListCoordinator start];
     self.window.rootViewController = pokemonList;
     [self.window makeKeyAndVisible];
     return pokemonList;

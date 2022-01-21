@@ -27,6 +27,7 @@
 		2E9CF1BD276AAFC300E2FFED /* PokemonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9CF1BB276AAFC300E2FFED /* PokemonCollectionViewCell.m */; };
 		2E9CF1BE276AAFC300E2FFED /* PokemonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9CF1BC276AAFC300E2FFED /* PokemonCollectionViewCell.xib */; };
 		2EA61E29276B9FA900F92911 /* PokemonImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA61E28276B9FA900F92911 /* PokemonImage.m */; };
+		2EC6D2022791F9BA0096BD6D /* PokemonDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6D2012791F9BA0096BD6D /* PokemonDisplay.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,9 @@
 		2E9CF1BC276AAFC300E2FFED /* PokemonCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PokemonCollectionViewCell.xib; sourceTree = "<group>"; };
 		2EA61E27276B9FA900F92911 /* PokemonImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokemonImage.h; sourceTree = "<group>"; };
 		2EA61E28276B9FA900F92911 /* PokemonImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PokemonImage.m; sourceTree = "<group>"; };
+		2EC6D2002791F9BA0096BD6D /* PokemonDisplay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokemonDisplay.h; sourceTree = "<group>"; };
+		2EC6D2012791F9BA0096BD6D /* PokemonDisplay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PokemonDisplay.m; sourceTree = "<group>"; };
+		2EC6D203279202050096BD6D /* ServicesProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServicesProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,7 @@
 				2E9CF1B7276A63DC00E2FFED /* ParsingData.m */,
 				2E3308AD278D04B700484953 /* ImageDownloader.h */,
 				2E3308AE278D04B700484953 /* ImageDownloader.m */,
+				2EC6D203279202050096BD6D /* ServicesProtocol.h */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -188,6 +193,8 @@
 				2E632ACD275AD60E008B794D /* Pokemon.m */,
 				2EA61E27276B9FA900F92911 /* PokemonImage.h */,
 				2EA61E28276B9FA900F92911 /* PokemonImage.m */,
+				2EC6D2002791F9BA0096BD6D /* PokemonDisplay.h */,
+				2EC6D2012791F9BA0096BD6D /* PokemonDisplay.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -307,6 +314,7 @@
 				2E9CF1B8276A63DC00E2FFED /* ParsingData.m in Sources */,
 				2E3308AF278D04B700484953 /* ImageDownloader.m in Sources */,
 				2E4E23BF278F7CB600AE2F49 /* PokemonListCoordinator.m in Sources */,
+				2EC6D2022791F9BA0096BD6D /* PokemonDisplay.m in Sources */,
 				2E11756C275804CA003473C3 /* main.m in Sources */,
 				2E632ACE275AD60E008B794D /* Pokemon.m in Sources */,
 				2E632ACB275AAA5C008B794D /* PokemonList.m in Sources */,

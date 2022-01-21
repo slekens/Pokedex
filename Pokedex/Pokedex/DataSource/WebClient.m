@@ -7,14 +7,21 @@
 
 #import "WebClient.h"
 
+@interface WebClient()
+
+@property(nonatomic, strong)id<PokemonParserProtocol> parser;
+
+@end
+
 @implementation WebClient
 
 @synthesize sessionConfiguration, manager, dataTask;
 
 #pragma mark - Initialization.
 
--(id)init {
+-(instancetype)initWithParser:(id<PokemonParserProtocol>)parser {
     if (self = [super init]) {
+        self.parser = parser;
         self.sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         self.manager = [NSURLSession sessionWithConfiguration: self.sessionConfiguration];
     }
@@ -23,19 +30,17 @@
 
 #pragma mark - WS Calls.
 
--(void)fetchPokemonList:(PokemonCompletionHandler)completionBlock {
+-(void)fetchList:(PokemonCompletionHandler)completionBlock {
     NSURL *url = [NSURL URLWithString: @"https://pokeapi.co/api/v2/pokemon/"];
     NSURLRequest *request = [NSURLRequest requestWithURL: url];
     
     self.dataTask = [self.manager dataTaskWithRequest: request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (error) {
-                NSLog(@"Error: %@", error);
-                completionBlock(nil, error);
-            } else {
-                completionBlock([ParsingData parsePokemonDataList: data], nil);
-            }
-        });
+        if (error) {
+            NSLog(@"Error: %@", error);
+            completionBlock(nil, error);
+        } else {
+            completionBlock([self.parser parsePokemonDataList: data], nil);
+        }
     }];
     [self.dataTask resume];
 }
@@ -55,7 +60,7 @@
                 NSLog(@"Error: %@", error);
                 completionBlock(nil, error);
             } else {
-                [pokemonList addObject: [ParsingData parsePokemonData: data]];
+                [pokemonList addObject: [self.parser parsePokemonData: data]];
             }
             dispatch_group_leave(group);
         }];

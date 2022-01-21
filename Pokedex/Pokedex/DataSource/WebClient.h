@@ -6,13 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ServicesProtocol.h"
 #import "PokemonList.h"
 #import "ParsingData.h"
 
-@interface WebClient : NSObject
-
-typedef void (^PokemonCompletionHandler)(PokemonList * __nullable pokemon, NSError * __nullable error);
-typedef void (^PokemonDataCompletionHandler)(NSArray <Pokemon *>* __nullable pokemonList, NSError * __nullable error);
+@interface WebClient : NSObject<PokemonFetcherProtocol>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,10 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)NSURLSession *manager;
 @property(nonatomic, strong)NSURLSessionDataTask *dataTask;
 
+-(instancetype)initWithParser:(id<PokemonParserProtocol>)parser;
+
 NS_ASSUME_NONNULL_END
 
-- (void)fetchPokemonList:(PokemonCompletionHandler _Nullable)completionBlock;
-- (void)fetchPokemonData:(PokemonList* _Nonnull)pokemonList andBlock:(PokemonDataCompletionHandler _Nullable)completionBlock;
 
 @end
 

@@ -25,9 +25,7 @@
 -(void)setup {
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    
     [self.collectionView registerNib: [UINib nibWithNibName: @"PokemonCollectionViewCell" bundle: [NSBundle mainBundle]] forCellWithReuseIdentifier: @"PokemonCellIdentifier"];
-    
     [self setupLayout];
 }
 
@@ -43,36 +41,32 @@
 }
 
 -(void)callWebServices {
-    WebClient *client = [[WebClient alloc]init];
-    
-    [client fetchPokemonList: ^(PokemonList * _Nullable pokemon, NSError * _Nullable error) {
-        if (error == nil) {
-            NSLog(@"Pokemons: %@", pokemon.pokemonList);
-            [client fetchPokemonData: pokemon andBlock: ^(NSArray<Pokemon *> * _Nullable pokemonList, NSError * _Nullable error) {
-                if (error == nil) {
-                    self.pokemonList = [[NSMutableArray alloc]initWithArray: pokemonList];
-                    [self.collectionView reloadData];
-                } else {
-                    NSLog(@"Error %@", error);
-                }
-            }];
+    __weak PokemonListViewController *weakSelf = self;
+    [self.viewModel fetchData:^(NSMutableArray<PokemonDisplay *> * _Nullable pokemonList, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
         } else {
-            NSLog(@"An error ocurred: %@", error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.collectionView reloadData];
+            });
         }
     }];
 }
 
 #pragma mark - UICollection Data Source
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return self.viewModel.numberOfSections;
+}
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.pokemonList.count;
+    return self.viewModel.numberOfItems;
 }
 
 -(__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellIdentifier = @"PokemonCellIdentifier";
     PokemonCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: cellIdentifier forIndexPath: indexPath];
-    [cell configure: self.pokemonList[indexPath.row]];
-    
+    [cell configure: [self.viewModel itemAtIndexPath: indexPath]];
     return cell;
 }
 
@@ -82,7 +76,7 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row + 1 == self.pokemonList.count) {
+    if (indexPath.row + 1 == self.viewModel.pokemonList.count) {
         NSLog(@"Call next WS");
     }
 }

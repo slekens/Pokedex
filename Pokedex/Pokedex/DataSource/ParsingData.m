@@ -9,10 +9,17 @@
 
 @implementation ParsingData
 
+#pragma mark - Initialization
+
+-(instancetype)init {
+    self = [super init];
+    return self;
+}
+
 #pragma mark - Parsing Data.
 
-+(Pokemon*)parsePokemonData:(NSData*)responseObject {
-    NSDictionary *response = [self serializeResponse: responseObject];
+-(Pokemon*)parsePokemonData:(NSData*)responseObject {
+    NSDictionary *response = [ParsingData serializeResponse: responseObject];
     Pokemon *pokemon = [[Pokemon alloc]init];
     if (response) {
         pokemon.name = response[@"name"];
@@ -28,8 +35,8 @@
     return pokemon;
 }
 
-+(PokemonList*)parsePokemonDataList:(NSData*)responseObject {
-    NSDictionary *response = [self serializeResponse: responseObject];
+-(PokemonList*)parsePokemonDataList:(NSData*)responseObject {
+    NSDictionary *response = [ParsingData serializeResponse: responseObject];
     PokemonList *pokemonList = [[PokemonList alloc]init];
     if (response) {
         pokemonList.previous = response[@"previous"];
@@ -46,7 +53,7 @@
     return pokemonList;
 }
 
-+(PokemonImage*)parsePokemonSprites:(id)responseObject {
+-(PokemonImage*)parsePokemonSprites:(id)responseObject {
     PokemonImage *images = [[PokemonImage alloc]init];
     if ([responseObject isKindOfClass: [NSDictionary class]]) {
         NSDictionary *others = responseObject[@"other"];

@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "Coordinator.h"
+#import "PokemonListViewModel.h"
 #import "PokemonListViewController.h"
 #import "Constants.h"
 

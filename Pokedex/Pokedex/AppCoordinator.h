@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AppCoordinator : NSObject<Coordinator>
 
-@property(nonatomic, strong)PokemonListCoordinator *pokemonList;
+@property(nonatomic, strong)PokemonListCoordinator *pokemonListCoordinator;
 
 -(instancetype)initWithWindow:(UIWindow*)window;
 

@@ -16,15 +16,15 @@
     self.layer.cornerRadius = 5.0;
 }
 
--(void)configure:(Pokemon *)pokemon {
+-(void)configure:(PokemonDisplay *)pokemon {
     self.backgroundColor = [UIColor clearColor];
     self.pokemonColor.backgroundColor = [UIColor whiteColor];
     self.firstBackground.backgroundColor = [UIColor redColor];
     self.pokeBallButton.backgroundColor = [UIColor blackColor];
     self.pokeBallButton.layer.cornerRadius = self.pokeBallButton.frame.size.width / 2;
-    self.lblName.text = pokemon.name;
-    self.lblPokemonNumber.text = [NSString stringWithFormat: @"#%ld" ,pokemon.pokemonId];
-    [self downloadPicture: pokemon.pictures.officialArtwork];
+    self.lblName.text = pokemon.pokemonName;
+    self.lblPokemonNumber.text = [NSString stringWithFormat: @"#%ld" ,pokemon.pokemonNumber];
+    [self downloadPicture: pokemon.pokemonImage];
 }
 
 -(void)downloadPicture:(NSString*)imageURL {
