@@ -30,7 +30,7 @@
 -(void)downloadPicture:(NSString*)imageURL {
     [[ImageDownloader sharedImageDownloader]downloadImageWithURL: imageURL andHandler:^(UIImage * _Nullable pokemonSprite, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Error: %@", error.localizedDescription);
+            self.pokemonPicture.image = [UIImage imageNamed: @"placeholder"];
         }
         self.pokemonPicture.image = pokemonSprite;
     }];

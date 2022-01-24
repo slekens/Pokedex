@@ -29,9 +29,8 @@
                         NSMutableArray<PokemonDisplay*> *list = [[NSMutableArray alloc]init];
                         for (Pokemon *pokemonItem in pokemonList) {
                             [list addObject: [[PokemonDisplay alloc]initWithPokemonName: pokemonItem.name
-                                                                                   andPokemonNumber: pokemonItem.pokemonId
-                                                                                    andPokemonImage: pokemonItem.pictures.officialArtwork]];
-                            NSLog(@"Pokemon %@", pokemonItem.name);
+                                                                       andPokemonNumber: pokemonItem.pokemonId
+                                                                        andPokemonImage: pokemonItem.pictures.officialArtwork]];
                         }
                         [weakSelf setPokemonList: list];
                         completionBlock(list, nil);
@@ -46,8 +45,17 @@
     }];
 }
 
-- (void)viewDidLoad { 
-    
+- (void)viewDidLoad {
+    __weak PokemonListViewModel *weakSelf = self;
+    [self fetchData:^(NSMutableArray<PokemonDisplay *> * _Nullable pokemonList, NSError * _Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                [weakSelf.pokemonListView showError: error];
+            } else {
+                [weakSelf.pokemonListView refresh];
+            }
+        });
+    }];
 }
 
 - (nullable PokemonDisplay *)itemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -66,7 +74,5 @@
 - (NSUInteger)numberOfSections {
     return 1;
 }
-
-
 
 @end

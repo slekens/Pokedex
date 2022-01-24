@@ -13,10 +13,11 @@ typedef void (^PokemonDisplayCompletionHandler)(NSMutableArray<PokemonDisplay *>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol PokemonListViewModelCoordinatorDelegate <NSObject>
+@protocol PokemonListViewProtocol <NSObject>
 
-@required
--(void)didTapOnRow:(Pokemon*)pokemon;
+@optional
+-(void)refresh;
+-(void)showError:(NSError *)error;
 
 @end
 
@@ -34,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PokemonListViewModel : NSObject<PokemonListViewModel>
 
+@property(nonatomic, weak)id <PokemonListViewProtocol> pokemonListView;
 @property(nonatomic, strong)WebClient *service;
 @property(nonatomic, strong)NSMutableArray<PokemonDisplay *> *pokemonList;
 @property(nonatomic, copy)NSString *title;

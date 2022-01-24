@@ -17,7 +17,7 @@
     [super viewDidLoad];
     self.title = NSLocalizedString(@"MainViewTitle", @"");
     [self setup];
-    [self callWebServices];
+    [self.viewModel viewDidLoad];
 }
 
 #pragma mark - Setup
@@ -40,17 +40,8 @@
     self.collectionView.bounces = YES;
 }
 
--(void)callWebServices {
-    __weak PokemonListViewController *weakSelf = self;
-    [self.viewModel fetchData:^(NSMutableArray<PokemonDisplay *> * _Nullable pokemonList, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.collectionView reloadData];
-            });
-        }
-    }];
+-(void)refresh {
+    [self.collectionView reloadData];
 }
 
 #pragma mark - UICollection Data Source
@@ -72,7 +63,7 @@
 
 #pragma mark - UIcollection Delegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Pokemon Selected: %ld", indexPath.row);
+    NSLog(@"Pokemon Selected: %@", self.viewModel.pokemonList[indexPath.row].pokemonName);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
