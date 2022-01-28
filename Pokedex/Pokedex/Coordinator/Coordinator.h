@@ -11,6 +11,8 @@
 #ifndef Coordinator_h
 #define Coordinator_h
 
+#pragma mark - Main Coordinator Protocol.
+
 @protocol Coordinator <NSObject>
 
 @required

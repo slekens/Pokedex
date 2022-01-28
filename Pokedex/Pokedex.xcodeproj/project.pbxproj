@@ -104,9 +104,7 @@
 		2E117558275804C9003473C3 /* Pokedex */ = {
 			isa = PBXGroup;
 			children = (
-				2E4E23C0278F84AB00AE2F49 /* Coordinator.h */,
-				2E4E23B9278F61B300AE2F49 /* AppCoordinator.h */,
-				2E4E23BA278F61B300AE2F49 /* AppCoordinator.m */,
+				2E8036E1279F360B007CF83C /* Coordinator */,
 				2E117585275843FA003473C3 /* Models */,
 				2E1175842758434C003473C3 /* DataSource */,
 				2E117582275842AB003473C3 /* Modules */,
@@ -152,7 +150,6 @@
 		2E117582275842AB003473C3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				2E1175832758430D003473C3 /* PokeList */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -173,13 +170,14 @@
 		2E1175842758434C003473C3 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				2EC6D203279202050096BD6D /* ServicesProtocol.h */,
 				2E1175862758443A003473C3 /* WebClient.h */,
 				2E1175872758443A003473C3 /* WebClient.m */,
 				2E9CF1B6276A63DC00E2FFED /* ParsingData.h */,
 				2E9CF1B7276A63DC00E2FFED /* ParsingData.m */,
 				2E3308AD278D04B700484953 /* ImageDownloader.h */,
 				2E3308AE278D04B700484953 /* ImageDownloader.m */,
-				2EC6D203279202050096BD6D /* ServicesProtocol.h */,
+				2E1175832758430D003473C3 /* PokeList */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -215,6 +213,16 @@
 				2E4E23C3278F877300AE2F49 /* PokemonListViewModel.m */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2E8036E1279F360B007CF83C /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				2E4E23C0278F84AB00AE2F49 /* Coordinator.h */,
+				2E4E23B9278F61B300AE2F49 /* AppCoordinator.h */,
+				2E4E23BA278F61B300AE2F49 /* AppCoordinator.m */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		2E9CF1B9276AAFAD00E2FFED /* Cells */ = {
@@ -467,6 +475,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3QP7U5GNG3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pokedex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -492,6 +501,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3QP7U5GNG3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pokedex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

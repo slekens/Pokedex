@@ -11,6 +11,8 @@
 
 @synthesize officialArtwork;
 
+#pragma mark - Initialization.
+
 -(instancetype)initWithImageURL:(NSString *)oficialArtwork {
     self = [super init];
     self.officialArtwork = oficialArtwork;

@@ -7,51 +7,77 @@
 
 #import "PokemonListViewModel.h"
 
+@interface PokemonListViewModel()
+
+@property(nonatomic, strong)PokemonList *pokemonDataList;
+
+@end
+
 @implementation PokemonListViewModel
 
 @synthesize title, pokemonList, service;
+
+#pragma mark - Initialization.
 
 -(instancetype)initWithService:(WebClient*)client {
     self = [super init];
     self.service = client;
     self.shouldShowLoader = true;
+    self.pokemonList = [[NSMutableArray alloc]init];
     return self;
 }
+
+#pragma mark - Fetch Data.
 
 -(void)fetchData:(PokemonDisplayCompletionHandler _Nullable)completionBlock {
     __weak PokemonListViewModel *weakSelf = self;
     [self.service fetchList: ^(PokemonList * _Nullable pokemon, NSError * _Nullable error) {
         if (error == nil) {
+            weakSelf.pokemonDataList = pokemon;
             [weakSelf
                  .service fetchPokemonData: pokemon andBlock: ^(NSArray<Pokemon *> * _Nullable pokemonList, NSError * _Nullable error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
+                
                     if (error == nil) {
-                        NSMutableArray<PokemonDisplay*> *list = [[NSMutableArray alloc]init];
                         for (Pokemon *pokemonItem in pokemonList) {
-                            [list addObject: [[PokemonDisplay alloc]initWithPokemonName: pokemonItem.name
+                            [weakSelf.pokemonList addObject: [[PokemonDisplay alloc]initWithPokemonName: pokemonItem.name
                                                                        andPokemonNumber: pokemonItem.pokemonId
                                                                         andPokemonImage: pokemonItem.pictures.officialArtwork]];
                         }
-                        [weakSelf setPokemonList: list];
-                        completionBlock(list, nil);
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completionBlock(weakSelf.pokemonList, nil);
+                        });
                     } else {
-                        completionBlock(nil, error);
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completionBlock(nil, error);
+                        });
                     }
-                });
             }];
         } else {
-            completionBlock(nil, error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(nil, error);
+            });
         }
     }];
 }
 
+#pragma mark - View Methods.
+
 - (void)viewDidLoad {
+    [self fetchData];
+}
+
+-(void)nextDataList {
+    [self fetchData];
+}
+
+-(void)fetchData {
     __weak PokemonListViewModel *weakSelf = self;
     [self fetchData:^(NSMutableArray<PokemonDisplay *> * _Nullable pokemonList, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error) {
                 [weakSelf.pokemonListView showError: error];
             } else {
+                
                 [weakSelf.pokemonListView refresh];
             }
         });

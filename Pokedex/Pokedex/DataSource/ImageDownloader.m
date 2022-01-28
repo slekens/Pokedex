@@ -34,6 +34,8 @@
     return self;
 }
 
+#pragma mark - Download Image.
+
 /// Download an Image from the given URL;
 /// @param imageURL The String with the URL.
 /// @param completionBlock The handler to return an UIImage or NSError.
@@ -41,14 +43,18 @@
     
     UIImage *cachedImage = [self.imageCache objectForKey: imageURL];
     if (cachedImage) {
-        completionBlock(cachedImage, nil);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(cachedImage, nil);
+        });
         return nil;
     }
     
     NSURL *url = [NSURL URLWithString: imageURL];
     if(!url) {
         NSError *error = [NSError errorWithDomain: [[NSBundle mainBundle]bundleIdentifier] code: ImageDownloaderErrorInvalidURL userInfo: nil];
-        completionBlock(nil, error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionBlock(nil, error);
+        });
         return nil;
     }
     

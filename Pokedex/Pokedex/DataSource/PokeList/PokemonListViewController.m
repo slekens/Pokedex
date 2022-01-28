@@ -20,7 +20,7 @@
     [self.viewModel viewDidLoad];
 }
 
-#pragma mark - Setup
+#pragma mark - Setup.
 
 -(void)setup {
     self.collectionView.dataSource = self;
@@ -39,6 +39,8 @@
     [self.collectionView setCollectionViewLayout: self.flowLayout];
     self.collectionView.bounces = YES;
 }
+
+#pragma mark - View Model Protocol.
 
 -(void)refresh {
     [self.collectionView reloadData];
@@ -68,7 +70,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row + 1 == self.viewModel.pokemonList.count) {
-        NSLog(@"Call next WS");
+        [self.viewModel nextDataList];
     }
 }
 

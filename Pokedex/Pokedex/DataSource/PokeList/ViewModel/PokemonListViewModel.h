@@ -26,10 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 @required
 
 -(void)viewDidLoad;
--(void)fetchData:(PokemonDisplayCompletionHandler _Nullable)completionBlock;
-- (NSUInteger)numberOfItems;
-- (NSUInteger)numberOfSections;
-- (nullable PokemonDisplay *)itemAtIndexPath:(NSIndexPath *)indexPath;
+-(void)nextDataList;
+-(NSUInteger)numberOfItems;
+-(NSUInteger)numberOfSections;
+-(nullable PokemonDisplay *)itemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

@@ -11,6 +11,8 @@
 
 @synthesize pokemonName, pokemonImage, pokemonNumber;
 
+#pragma mark - Initialization.
+
 -(instancetype)initWithPokemonName:(NSString*)name
                   andPokemonNumber:(NSInteger)number
                    andPokemonImage:(NSString*)image {

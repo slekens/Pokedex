@@ -7,6 +7,8 @@
 
 #import "AppCoordinator.h"
 
+#pragma mark - Private Interface
+
 @interface AppCoordinator()
 
 @property(nonatomic, assign)UIWindow* window;
@@ -17,12 +19,16 @@
 
 @synthesize pokemonListCoordinator;
 
+#pragma mark - Initialize.
+
 -(instancetype)initWithWindow:(UIWindow*)window {
     self = [super init];
     self.window = window;
     self.pokemonListCoordinator = [[PokemonListCoordinator alloc]init];
     return self;
 }
+
+#pragma mark - Coordinator config.
 
 -(UIViewController*)start {
     UIViewController* pokemonList = [self.pokemonListCoordinator start];

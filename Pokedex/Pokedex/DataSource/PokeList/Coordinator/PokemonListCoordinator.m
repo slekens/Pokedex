@@ -11,6 +11,8 @@
 
 @synthesize rootController;
 
+#pragma mark - Initialization.
+
 -(UIViewController*)start {
     PokemonListViewController* pokemonListController = [[PokemonListViewController alloc]initWithNibName: kMainViewName bundle: [NSBundle mainBundle]];
     ParsingData *parser = [[ParsingData alloc]init];

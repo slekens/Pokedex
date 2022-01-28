@@ -65,6 +65,8 @@
     return images;
 }
 
+#pragma mark - Serialize Data.
+
 +(NSDictionary* _Nullable)serializeResponse:(NSData*)data {
     NSError *error;
     return [NSJSONSerialization JSONObjectWithData: data options: kNilOptions error: &error];
