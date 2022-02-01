@@ -27,9 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)viewDidLoad;
 -(void)nextDataList;
+-(void)search:(NSString *)searchText;
 -(NSUInteger)numberOfItems;
 -(NSUInteger)numberOfSections;
+-(void)cancelSearch;
 -(nullable PokemonDisplay *)itemAtIndexPath:(NSIndexPath *)indexPath;
+-(nullable PokemonDisplay *)didSelectAtIndexPath:(nonnull NSIndexPath *)indexPath;
 
 @end
 
@@ -38,8 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, weak)id <PokemonListViewProtocol> pokemonListView;
 @property(nonatomic, strong)WebClient *service;
 @property(nonatomic, strong)NSMutableArray<PokemonDisplay *> *pokemonList;
+@property(nonatomic, strong)NSMutableArray<PokemonDisplay *> *filteredPokemonList;
 @property(nonatomic, copy)NSString *title;
-@property(nonatomic, assign)Boolean shouldShowLoader;
+@property(nonatomic, assign)BOOL isFiltered;
 
 -(instancetype)initWithService:(WebClient*)client;
 

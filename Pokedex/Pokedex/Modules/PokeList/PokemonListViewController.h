@@ -10,10 +10,11 @@
 #import "PokemonListViewModel.h"
 #import "PokemonCollectionViewCell.h"
 
-@interface PokemonListViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PokemonListViewProtocol>
+@interface PokemonListViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PokemonListViewProtocol, UISearchResultsUpdating, UISearchBarDelegate>
 
 NS_ASSUME_NONNULL_BEGIN
 
+@property(nonatomic, weak)IBOutlet UIToolbar *toolbar;
 @property(nonatomic, weak)IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong)IBOutlet UICollectionViewFlowLayout *flowLayout;
 

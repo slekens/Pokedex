@@ -20,7 +20,9 @@
     PokemonListViewModel *viewModel = [[PokemonListViewModel alloc]initWithService: client];
     viewModel.pokemonListView = pokemonListController;
     pokemonListController.viewModel = viewModel;
-    self.rootController = [[UINavigationController alloc]initWithRootViewController: pokemonListController];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController: pokemonListController];
+    navController.navigationBar.prefersLargeTitles = YES;
+    self.rootController = navController;
     return self.rootController;
 }
 

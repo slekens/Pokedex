@@ -7,6 +7,14 @@
 
 #import "PokemonListViewController.h"
 
+@interface PokemonListViewController()
+
+@property(nonatomic, strong)UISearchController *searchController;
+@property(nonatomic, strong)UIBarButtonItem *countItem;
+@property(nonatomic, strong)UILabel *itemCount;
+
+@end
+
 @implementation PokemonListViewController
 
 @synthesize flowLayout, collectionView;
@@ -27,6 +35,26 @@
     self.collectionView.delegate = self;
     [self.collectionView registerNib: [UINib nibWithNibName: @"PokemonCollectionViewCell" bundle: [NSBundle mainBundle]] forCellWithReuseIdentifier: @"PokemonCellIdentifier"];
     [self setupLayout];
+    [self setupSearchController];
+    [self setupToolBar];
+}
+
+-(void)setupSearchController {
+    self.searchController = [[UISearchController alloc]init];
+    self.searchController.searchBar.delegate = self;
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.obscuresBackgroundDuringPresentation = YES;
+    self.searchController.searchBar.placeholder = @"Search a Pokemon";
+    self.navigationItem.searchController = self.searchController;
+    [self setDefinesPresentationContext: YES];
+}
+
+-(void)setupToolBar {
+    self.itemCount = [[UILabel alloc]initWithFrame: CGRectZero];
+    self.itemCount.text = [NSString stringWithFormat: @"%ld", self.viewModel.pokemonList.count];
+    self.itemCount.textColor = UIColor.systemRedColor;
+    self.countItem = [[UIBarButtonItem alloc]initWithCustomView: self.itemCount];
+    [self.toolbar setItems: @[self.countItem]];
 }
 
 -(void)setupLayout {
@@ -44,6 +72,11 @@
 
 -(void)refresh {
     [self.collectionView reloadData];
+    [self setupToolBar];
+}
+
+-(void)showError:(NSError *)error {
+    NSLog(@"Error %@", error.localizedDescription);
 }
 
 #pragma mark - UICollection Data Source
@@ -65,7 +98,7 @@
 
 #pragma mark - UIcollection Delegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Pokemon Selected: %@", self.viewModel.pokemonList[indexPath.row].pokemonName);
+    NSLog(@"Pokemon Selected: %@", [self.viewModel didSelectAtIndexPath: indexPath]);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -77,6 +110,19 @@
 #pragma mark - FlowLayout
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(5, 5, 5, 5);
+}
+
+#pragma mark - Search Delegate
+-(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSLog(@"Update Search");
+}
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self.viewModel search: searchText];
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [self.viewModel cancelSearch];
 }
 
 @end

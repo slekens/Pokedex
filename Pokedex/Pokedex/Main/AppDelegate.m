@@ -6,6 +6,7 @@
 //
 
 #import "AppDelegate.h"
+#import <UIKit/UIKit.h>
 
 @interface AppDelegate ()
 
@@ -15,7 +16,19 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc]init];
+    [appearance configureWithTransparentBackground];
+    appearance.backgroundColor = UIColor.clearColor;
+    appearance.backgroundEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
+        
+    UINavigationBarAppearance *scrollingAppearance = [[UINavigationBarAppearance alloc]init];
+    [scrollingAppearance configureWithTransparentBackground];
+    scrollingAppearance.backgroundColor = UIColor.whiteColor;
+        
+    UINavigationBar.appearance.standardAppearance = appearance;
+    UINavigationBar.appearance.scrollEdgeAppearance = scrollingAppearance;
+    UINavigationBar.appearance.compactAppearance = scrollingAppearance;
+    
     return YES;
 }
 

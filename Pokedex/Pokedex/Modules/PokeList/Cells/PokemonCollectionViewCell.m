@@ -57,7 +57,7 @@
     __weak PokemonCollectionViewCell  *strongSelf = self;
     [[ImageDownloader sharedImageDownloader]downloadImageWithURL: imageURL andHandler:^(UIImage * _Nullable pokemonSprite, NSError * _Nullable error) {
         if (error) {
-            strongSelf.pokemonPicture.image = [UIImage imageNamed: @"placeholder"];
+            NSLog(@"Error %@", error.localizedDescription);
         }
         if (strongSelf.previousURL == imageURL) {
             strongSelf.pokemonPicture.image = pokemonSprite;

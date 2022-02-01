@@ -15,14 +15,14 @@
 
 @implementation PokemonListViewModel
 
-@synthesize title, pokemonList, service;
+@synthesize title, pokemonList, service, isFiltered;
 
 #pragma mark - Initialization.
 
 -(instancetype)initWithService:(WebClient*)client {
     self = [super init];
     self.service = client;
-    self.shouldShowLoader = true;
+    self.isFiltered = NO;
     self.pokemonList = [[NSMutableArray alloc]init];
     return self;
 }
@@ -63,11 +63,34 @@
 #pragma mark - View Methods.
 
 - (void)viewDidLoad {
+    self.isFiltered = NO;
     [self fetchData];
 }
 
 -(void)nextDataList {
+    self.isFiltered = NO;
     [self fetchData];
+}
+
+-(void)search:(NSString *)searchText {
+    if (searchText == 0) {
+        self.isFiltered = NO;
+    } else {
+        self.isFiltered = YES;
+        self.filteredPokemonList = [[NSMutableArray alloc]init];
+        for (PokemonDisplay* pokemon in self.pokemonList) {
+            NSRange nameRange = [pokemon.pokemonName rangeOfString: searchText options: NSCaseInsensitiveSearch];
+            if (nameRange.location != NSNotFound) {
+                [self.filteredPokemonList addObject: pokemon];
+            }
+        }
+        [self.pokemonListView refresh];
+    }
+}
+
+-(void)cancelSearch {
+    self.isFiltered = NO;
+    [self.pokemonListView refresh];
 }
 
 -(void)fetchData {
@@ -84,16 +107,35 @@
     }];
 }
 
-- (nullable PokemonDisplay *)itemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+-(nullable PokemonDisplay *)itemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if (indexPath.row >= self.pokemonList.count) {
         return nil;
     }
-    return self.pokemonList[indexPath.row];
+    if (self.isFiltered) {
+        return self.filteredPokemonList[indexPath.row];
+    } else {
+        return self.pokemonList[indexPath.row];
+    }
+}
+
+-(nullable PokemonDisplay *)didSelectAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    if (indexPath.row >= self.pokemonList.count) {
+        return nil;
+    }
+    if (self.isFiltered) {
+        return self.filteredPokemonList[indexPath.row];
+    } else {
+        return self.pokemonList[indexPath.row];
+    }
 }
 
 
 - (NSUInteger)numberOfItems {
-    return self.pokemonList.count;
+    if (self.isFiltered) {
+        return self.filteredPokemonList.count;
+    } else {
+        return self.pokemonList.count;
+    }
 }
 
 

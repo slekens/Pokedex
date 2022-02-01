@@ -150,6 +150,7 @@
 		2E117582275842AB003473C3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2E1175832758430D003473C3 /* PokeList */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -177,7 +178,6 @@
 				2E9CF1B7276A63DC00E2FFED /* ParsingData.m */,
 				2E3308AD278D04B700484953 /* ImageDownloader.h */,
 				2E3308AE278D04B700484953 /* ImageDownloader.m */,
-				2E1175832758430D003473C3 /* PokeList */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
