@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PokemonDisplay : NSObject
 
-@property(nonatomic, strong)NSString *pokemonName;
+@property(nonatomic, copy)NSString *pokemonName;
 @property(nonatomic, assign)NSInteger pokemonNumber;
-@property(nonatomic, strong)NSString *pokemonImage;
+@property(nonatomic, copy)NSString *pokemonImage;
 
 -(instancetype)initWithPokemonName:(NSString*)name
                   andPokemonNumber:(NSInteger)number

@@ -9,6 +9,7 @@
 #import "WebClient.h"
 #import "PokemonListViewModel.h"
 #import "PokemonCollectionViewCell.h"
+#import "Constants.h"
 
 @interface PokemonListViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PokemonListViewProtocol, UISearchResultsUpdating, UISearchBarDelegate>
 

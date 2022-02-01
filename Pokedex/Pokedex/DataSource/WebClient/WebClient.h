@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong)NSURLSessionConfiguration *sessionConfiguration;
 @property(nonatomic, strong)NSURLSession *manager;
-@property(nonatomic, strong)NSURLSessionDataTask *dataTask;
+@property(nonatomic, assign)NSURLSessionDataTask *dataTask;
 
 -(instancetype)initWithParser:(id<PokemonParserProtocol>)parser;
 

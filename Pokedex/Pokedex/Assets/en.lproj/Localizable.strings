@@ -8,3 +8,7 @@
 
 // View Titles.
 "MainViewTitle" = "Pokedex";
+
+// Main labels
+"SearchTitle" = "Search a Pokemon";
+"NumberElements" = "Number of pokemon: %ld";

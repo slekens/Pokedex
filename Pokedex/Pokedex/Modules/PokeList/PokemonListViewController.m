@@ -33,10 +33,10 @@
 -(void)setup {
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    [self.collectionView registerNib: [UINib nibWithNibName: @"PokemonCollectionViewCell" bundle: [NSBundle mainBundle]] forCellWithReuseIdentifier: @"PokemonCellIdentifier"];
+    [self.collectionView registerNib: [UINib nibWithNibName: kMainCellName  bundle: [NSBundle mainBundle]] forCellWithReuseIdentifier: kMainCellIdentifier];
     [self setupLayout];
-    [self setupSearchController];
     [self setupToolBar];
+    [self setupSearchController];
 }
 
 -(void)setupSearchController {
@@ -44,14 +44,15 @@
     self.searchController.searchBar.delegate = self;
     self.searchController.searchResultsUpdater = self;
     self.searchController.obscuresBackgroundDuringPresentation = YES;
-    self.searchController.searchBar.placeholder = @"Search a Pokemon";
+    self.searchController.searchBar.placeholder = NSLocalizedString(@"SearchTitle", @"");
     self.navigationItem.searchController = self.searchController;
     [self setDefinesPresentationContext: YES];
 }
 
 -(void)setupToolBar {
     self.itemCount = [[UILabel alloc]initWithFrame: CGRectZero];
-    self.itemCount.text = [NSString stringWithFormat: @"%ld", self.viewModel.pokemonList.count];
+    [self.itemCount setFont: [UIFont systemFontOfSize: 14.0 weight: UIFontWeightLight]];
+    self.itemCount.text = [NSString stringWithFormat: NSLocalizedString(@"NumberElements", ""), self.viewModel.pokemonList.count];
     self.itemCount.textColor = UIColor.systemRedColor;
     self.countItem = [[UIBarButtonItem alloc]initWithCustomView: self.itemCount];
     [self.toolbar setItems: @[self.countItem]];
@@ -90,7 +91,7 @@
 
 -(__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *cellIdentifier = @"PokemonCellIdentifier";
+    NSString *cellIdentifier = kMainCellIdentifier;
     PokemonCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: cellIdentifier forIndexPath: indexPath];
     [cell configure: [self.viewModel itemAtIndexPath: indexPath]];
     return cell;

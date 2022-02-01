@@ -18,6 +18,7 @@
 		2E11757E27583CD9003473C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2E11758027583CD9003473C3 /* Localizable.strings */; };
 		2E1175882758443A003473C3 /* WebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E1175872758443A003473C3 /* WebClient.m */; };
 		2E3308AF278D04B700484953 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3308AE278D04B700484953 /* ImageDownloader.m */; };
+		2E42323627A9A09700E0CCDE /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42323527A9A09700E0CCDE /* CoreDataManager.m */; };
 		2E4E23BB278F61B300AE2F49 /* AppCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4E23BA278F61B300AE2F49 /* AppCoordinator.m */; };
 		2E4E23BF278F7CB600AE2F49 /* PokemonListCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4E23BE278F7CB600AE2F49 /* PokemonListCoordinator.m */; };
 		2E4E23C4278F877300AE2F49 /* PokemonListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4E23C3278F877300AE2F49 /* PokemonListViewModel.m */; };
@@ -51,6 +52,8 @@
 		2E1175872758443A003473C3 /* WebClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebClient.m; sourceTree = "<group>"; };
 		2E3308AD278D04B700484953 /* ImageDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
 		2E3308AE278D04B700484953 /* ImageDownloader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
+		2E42323427A9A09700E0CCDE /* CoreDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		2E42323527A9A09700E0CCDE /* CoreDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		2E4E23B9278F61B300AE2F49 /* AppCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCoordinator.h; sourceTree = "<group>"; };
 		2E4E23BA278F61B300AE2F49 /* AppCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCoordinator.m; sourceTree = "<group>"; };
 		2E4E23BD278F7CB600AE2F49 /* PokemonListCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokemonListCoordinator.h; sourceTree = "<group>"; };
@@ -171,13 +174,9 @@
 		2E1175842758434C003473C3 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				2EC6D203279202050096BD6D /* ServicesProtocol.h */,
-				2E1175862758443A003473C3 /* WebClient.h */,
-				2E1175872758443A003473C3 /* WebClient.m */,
-				2E9CF1B6276A63DC00E2FFED /* ParsingData.h */,
-				2E9CF1B7276A63DC00E2FFED /* ParsingData.m */,
-				2E3308AD278D04B700484953 /* ImageDownloader.h */,
-				2E3308AE278D04B700484953 /* ImageDownloader.m */,
+				2E42323327A9A07B00E0CCDE /* Database */,
+				2E42323227A9A06E00E0CCDE /* Parsers */,
+				2E42323127A9A05E00E0CCDE /* WebClient */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -195,6 +194,36 @@
 				2EC6D2012791F9BA0096BD6D /* PokemonDisplay.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2E42323127A9A05E00E0CCDE /* WebClient */ = {
+			isa = PBXGroup;
+			children = (
+				2E3308AD278D04B700484953 /* ImageDownloader.h */,
+				2E3308AE278D04B700484953 /* ImageDownloader.m */,
+				2EC6D203279202050096BD6D /* ServicesProtocol.h */,
+				2E1175862758443A003473C3 /* WebClient.h */,
+				2E1175872758443A003473C3 /* WebClient.m */,
+			);
+			path = WebClient;
+			sourceTree = "<group>";
+		};
+		2E42323227A9A06E00E0CCDE /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				2E9CF1B6276A63DC00E2FFED /* ParsingData.h */,
+				2E9CF1B7276A63DC00E2FFED /* ParsingData.m */,
+			);
+			path = Parsers;
+			sourceTree = "<group>";
+		};
+		2E42323327A9A07B00E0CCDE /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				2E42323427A9A09700E0CCDE /* CoreDataManager.h */,
+				2E42323527A9A09700E0CCDE /* CoreDataManager.m */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		2E4E23BC278F7C9200AE2F49 /* Coordinator */ = {
@@ -328,6 +357,7 @@
 				2E632ACB275AAA5C008B794D /* PokemonList.m in Sources */,
 				2EA61E29276B9FA900F92911 /* PokemonImage.m in Sources */,
 				2E11755E275804C9003473C3 /* SceneDelegate.m in Sources */,
+				2E42323627A9A09700E0CCDE /* CoreDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

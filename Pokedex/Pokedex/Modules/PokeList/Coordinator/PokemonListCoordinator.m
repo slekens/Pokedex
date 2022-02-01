@@ -20,10 +20,19 @@
     PokemonListViewModel *viewModel = [[PokemonListViewModel alloc]initWithService: client];
     viewModel.pokemonListView = pokemonListController;
     pokemonListController.viewModel = viewModel;
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController: pokemonListController];
-    navController.navigationBar.prefersLargeTitles = YES;
-    self.rootController = navController;
+    self.rootController = [[UINavigationController alloc]initWithRootViewController: pokemonListController];
+    [self configureNavigationBar];
     return self.rootController;
+}
+
+-(void)configureNavigationBar {
+    self.rootController.navigationBar.prefersLargeTitles = YES;
+    UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc]init];
+    [appearance configureWithTransparentBackground];
+    appearance.backgroundEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleProminent];
+    [self.rootController.navigationBar setCompactAppearance: appearance];
+    [self.rootController.navigationBar setScrollEdgeAppearance: appearance];
+    [self.rootController.navigationBar setStandardAppearance: appearance];
 }
 
 @end

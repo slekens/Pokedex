@@ -29,6 +29,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.layer.cornerRadius = 5.0;
+    self.layer.borderWidth = 1.0;
+    self.layer.borderColor = UIColor.systemGrayColor.CGColor;
 }
 
 #pragma mark - Cleaning.

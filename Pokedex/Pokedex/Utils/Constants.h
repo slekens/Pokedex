@@ -9,3 +9,9 @@
 
 // Views names.
 extern NSString *const kMainViewName;
+
+// Cell names.
+extern NSString *const kMainCellName;
+
+// Cell Identifiers
+extern NSString *const kMainCellIdentifier;
