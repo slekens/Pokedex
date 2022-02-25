@@ -6,10 +6,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#import "Constants.h"
+#import "PokemonDisplay.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CoreDataManager : NSObject
+
+-(void)createNewEntryWith:(PokemonDisplay*)pokemon;
 
 @end
 

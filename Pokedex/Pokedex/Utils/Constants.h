@@ -15,3 +15,6 @@ extern NSString *const kMainCellName;
 
 // Cell Identifiers
 extern NSString *const kMainCellIdentifier;
+
+//Database
+extern NSString *const kDatabaseName;

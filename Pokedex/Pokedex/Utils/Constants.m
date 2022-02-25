@@ -15,3 +15,6 @@ NSString *const kMainCellName = @"PokemonCollectionViewCell";
 
 //Cell Identifiers.
 NSString *const kMainCellIdentifier = @"PokemonCellIdentifier";
+
+//Database
+NSString *const kDatabaseName = @"Pokedex";

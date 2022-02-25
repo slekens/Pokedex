@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "PokemonDisplay.h"
 #import "WebClient.h"
+#import "CoreDataManager.h"
 
 typedef void (^PokemonDisplayCompletionHandler)(NSMutableArray<PokemonDisplay *> * _Nullable pokemonList, NSError * _Nullable error);
 

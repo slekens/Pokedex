@@ -10,6 +10,7 @@
 @interface PokemonListViewModel()
 
 @property(nonatomic, strong)PokemonList *pokemonDataList;
+@property(nonatomic, strong)CoreDataManager *databaseManager;
 
 @end
 
@@ -24,6 +25,7 @@
     self.service = client;
     self.isFiltered = NO;
     self.pokemonList = [[NSMutableArray alloc]init];
+    self.databaseManager = [[CoreDataManager alloc]init];
     return self;
 }
 
@@ -39,9 +41,11 @@
                 
                     if (error == nil) {
                         for (Pokemon *pokemonItem in pokemonList) {
-                            [weakSelf.pokemonList addObject: [[PokemonDisplay alloc]initWithPokemonName: pokemonItem.name
-                                                                       andPokemonNumber: pokemonItem.pokemonId
-                                                                        andPokemonImage: pokemonItem.pictures.officialArtwork]];
+                            PokemonDisplay *pokemon = [[PokemonDisplay alloc]initWithPokemonName: pokemonItem.name
+                                                                                andPokemonNumber: pokemonItem.pokemonId
+                                                                                 andPokemonImage: pokemonItem.pictures.officialArtwork];
+                            [weakSelf.pokemonList addObject: pokemon];
+                            //[weakSelf.databaseManager createNewEntryWith: pokemon];
                         }
                         dispatch_async(dispatch_get_main_queue(), ^{
                             completionBlock(weakSelf.pokemonList, nil);

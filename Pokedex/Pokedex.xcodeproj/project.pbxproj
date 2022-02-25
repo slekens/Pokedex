@@ -19,6 +19,7 @@
 		2E1175882758443A003473C3 /* WebClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E1175872758443A003473C3 /* WebClient.m */; };
 		2E3308AF278D04B700484953 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E3308AE278D04B700484953 /* ImageDownloader.m */; };
 		2E42323627A9A09700E0CCDE /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E42323527A9A09700E0CCDE /* CoreDataManager.m */; };
+		2E499E1627C850AF00AE147E /* Pokedex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E499E1427C850AF00AE147E /* Pokedex.xcdatamodeld */; };
 		2E4E23BB278F61B300AE2F49 /* AppCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4E23BA278F61B300AE2F49 /* AppCoordinator.m */; };
 		2E4E23BF278F7CB600AE2F49 /* PokemonListCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4E23BE278F7CB600AE2F49 /* PokemonListCoordinator.m */; };
 		2E4E23C4278F877300AE2F49 /* PokemonListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4E23C3278F877300AE2F49 /* PokemonListViewModel.m */; };
@@ -54,6 +55,7 @@
 		2E3308AE278D04B700484953 /* ImageDownloader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
 		2E42323427A9A09700E0CCDE /* CoreDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
 		2E42323527A9A09700E0CCDE /* CoreDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
+		2E499E1527C850AF00AE147E /* Pokedex.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pokedex.xcdatamodel; sourceTree = "<group>"; };
 		2E4E23B9278F61B300AE2F49 /* AppCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCoordinator.h; sourceTree = "<group>"; };
 		2E4E23BA278F61B300AE2F49 /* AppCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCoordinator.m; sourceTree = "<group>"; };
 		2E4E23BD278F7CB600AE2F49 /* PokemonListCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokemonListCoordinator.h; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		2E1175842758434C003473C3 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				2EE08FC127C8504B00F48019 /* DataModel */,
 				2E42323327A9A07B00E0CCDE /* Database */,
 				2E42323227A9A06E00E0CCDE /* Parsers */,
 				2E42323127A9A05E00E0CCDE /* WebClient */,
@@ -264,6 +267,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		2EE08FC127C8504B00F48019 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				2E499E1427C850AF00AE147E /* Pokedex.xcdatamodeld */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -345,6 +356,7 @@
 				2E1175882758443A003473C3 /* WebClient.m in Sources */,
 				2E4E23BB278F61B300AE2F49 /* AppCoordinator.m in Sources */,
 				2E117561275804C9003473C3 /* PokemonListViewController.m in Sources */,
+				2E499E1627C850AF00AE147E /* Pokedex.xcdatamodeld in Sources */,
 				2E4E23C4278F877300AE2F49 /* PokemonListViewModel.m in Sources */,
 				2E11755B275804C9003473C3 /* AppDelegate.m in Sources */,
 				2E9CF1BD276AAFC300E2FFED /* PokemonCollectionViewCell.m in Sources */,
@@ -520,6 +532,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.slekens.Pokedex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -546,6 +559,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.slekens.Pokedex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -572,6 +586,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2E499E1427C850AF00AE147E /* Pokedex.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2E499E1527C850AF00AE147E /* Pokedex.xcdatamodel */,
+			);
+			currentVersion = 2E499E1527C850AF00AE147E /* Pokedex.xcdatamodel */;
+			path = Pokedex.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2E11754E275804C9003473C3 /* Project object */;
 }
