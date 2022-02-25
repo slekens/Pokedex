@@ -16,8 +16,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    CoreDataManager *manager = [[CoreDataManager alloc]init];
-    NSLog(@"Model %@", manager);
     return YES;
 }
 

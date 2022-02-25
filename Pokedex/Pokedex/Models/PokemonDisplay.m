@@ -23,4 +23,12 @@
     return self;
 }
 
+-(instancetype)initWithModel:(PokemonMO *)model {
+    self = [super init];
+    self.pokemonName = model.name;
+    self.pokemonNumber = model.pokemonId;
+    self.pokemonImage = model.pokemonURL;
+    return self;
+}
+
 @end

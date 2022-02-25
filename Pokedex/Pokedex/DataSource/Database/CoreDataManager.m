@@ -9,102 +9,114 @@
 
 @interface CoreDataManager()
 
-@property(nonatomic, copy)NSString *modelName;
 @property(nonatomic, strong)NSManagedObjectContext *managedObjectContext;
-@property(nonatomic, strong)NSManagedObjectModel *managedObjectModel;
-@property(nonatomic, strong)NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @end
 
 @implementation CoreDataManager
 
--(NSManagedObjectContext*)managedObjectContext {
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSMainQueueConcurrencyType];
-        [_managedObjectContext setPersistentStoreCoordinator: coordinator];
-    }
-    return _managedObjectContext;
+-(instancetype)init {
+    self = [super init];
+    [self setUpCoreDataStack];
+    return self;
 }
 
--(NSPersistentStoreCoordinator*)persistentStoreCoordinator {
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent: [NSString stringWithFormat: @"%@.sqlite", kDatabaseName]];
+-(void)setUpCoreDataStack
+{
+    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSBundle allBundles]];
+    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
+    NSURL *url = [[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject] URLByAppendingPathComponent:@"Pokedex.sqlite"];
+    
+    NSDictionary *options = @{NSPersistentStoreFileProtectionKey: NSFileProtectionComplete,
+                              NSMigratePersistentStoresAutomaticallyOption:@YES};
     NSError *error = nil;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    }
-    return _persistentStoreCoordinator;
-}
+    NSPersistentStore *store = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error];
+    if (!store)
+    {
+        NSLog(@"Error adding persistent store. Error %@",error);
 
--(NSManagedObjectModel*)managedObjectModel {
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
+        NSError *deleteError = nil;
+        if ([[NSFileManager defaultManager] removeItemAtURL:url error:&deleteError])
+        {
+            error = nil;
+            store = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error];
+        }
+        
+        if (!store)
+        {
+            // Also inform the user...
+            NSLog(@"Failed to create persistent store. Error %@. Delete error %@",error,deleteError);
+            abort();
+        }
     }
     
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource: kDatabaseName withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return _managedObjectModel;
+    self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    self.managedObjectContext.persistentStoreCoordinator = psc;
 }
-
--(NSURL*)applicationDocumentsDirectory {
-    NSURL *documentsDirectoryURL = [[[NSFileManager defaultManager] URLsForDirectory: NSDocumentDirectory  inDomains: NSUserDomainMask]lastObject];
-    return [documentsDirectoryURL URLByAppendingPathComponent: kDatabaseName];
-}
-
 -(void)saveContext {
     NSError *error = nil;
-    if ([_managedObjectContext save: &error]) {
+    if ([_managedObjectContext hasChanges] && ![_managedObjectContext save:&error]) {
         NSLog(@"Can't save! %@ %@", error, [error localizedDescription]);
+    } else {
+        NSLog(@"Saved Successfully");
     }
-    NSLog(@"Saved Successfully");
 }
 
--(void)createNewEntryWith:(PokemonDisplay*)pokemon {
-    NSManagedObject *model;
-    model = [NSEntityDescription insertNewObjectForEntityForName: @"Pokemon" inManagedObjectContext: _managedObjectContext];
-    NSNumber *pokemonNumber = [NSNumber numberWithInteger: pokemon.pokemonNumber];
-    [model setValue: pokemon.pokemonName forKey: @"name"];
-    [model setValue: pokemonNumber forKey: @"pokemonId"];
-    [model setValue: pokemon.pokemonImage forKey: @"pokemonURL"];
+-(void)saveNewPokemon:(PokemonDisplay*)pokemon {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"Pokemon"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"pokemonId == %ld", pokemon.pokemonNumber];
+    [request setPredicate: predicate];
     
+    NSError *error = nil;
+    NSArray *results = [self.managedObjectContext executeFetchRequest: request error: &error];
+
+    if ([results count] == 0) {
+        [self createNewEntryWith: pokemon];
+    } else {
+        NSLog(@"Error already exists %@", error.localizedDescription);
+    }
+}
+
+-(NSMutableArray<PokemonDisplay *>*)fetchResults {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Pokemon"];
+     
+    NSError *error = nil;
+    NSArray *results = [self.managedObjectContext executeFetchRequest:request error:&error];
+    if (!results) {
+        NSLog(@"Error fetching pokemon objects: %@\n%@", [error localizedDescription], [error userInfo]);
+        abort();
+    }
+    NSLog(@"Results %@", results);
+    NSMutableArray<PokemonDisplay*>* list = [[NSMutableArray alloc]init];
+    for (PokemonMO *result in results) {
+        [list addObject: [[PokemonDisplay alloc]initWithModel: result]];
+    }
+    return list;
+}
+
+-(void)deleteAllPokemons {
+    NSFetchRequest * allRecords = [[NSFetchRequest alloc] init];
+    [allRecords setEntity:[NSEntityDescription entityForName: @"Pokemon" inManagedObjectContext: self.managedObjectContext]];
+    [allRecords setIncludesPropertyValues:NO];
+    NSError * error = nil;
+    NSArray * result = [self.managedObjectContext executeFetchRequest: allRecords error: &error];
+    for (NSManagedObject *pokemon in result) {
+        [self.managedObjectContext deleteObject: pokemon];
+    }
     [self saveContext];
 }
 
-//-(instancetype)initWith:(NSString*)modelName {
-//    self = [super init];
-//    self.modelName = modelName;
-//    NSURL *modelURL = [[NSBundle mainBundle]URLForResource: self.modelName withExtension: @"momd"];
-//    self.managedObjectModel = [[NSManagedObjectModel alloc]initWithContentsOfURL: modelURL];
-//    self.persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel: self.managedObjectModel];
-//
-//    NSString *storeName = [NSString stringWithFormat: @"%@.sqlite", self.modelName];
-//
-//    NSURL *documentsDirectoryURL = [[[NSFileManager defaultManager] URLsForDirectory: NSDocumentDirectory  inDomains: NSUserDomainMask]lastObject];
-//    NSURL *persistentStoreURL = [documentsDirectoryURL URLByAppendingPathComponent: storeName];
-//
-//
-//    self.managedObjectContext = [[NSManagedObjectContext alloc]initWithConcurrencyType: NSMainQueueConcurrencyType];
-//    self.managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
-//
-//    NSError *error = nil;
-//    [self.persistentStoreCoordinator addPersistentStoreWithType: NSSQLiteStoreType
-//                                                  configuration: nil
-//                                                            URL:persistentStoreURL
-//                                                        options: nil
-//                                                          error: &error];
-//    if (error) {
-//        NSLog(@"Unable to load persistance store");
-//    }
-//    return self;
-//}
+-(void)createNewEntryWith:(PokemonDisplay*)pokemon {
+    PokemonMO *model = [NSEntityDescription insertNewObjectForEntityForName: @"Pokemon" inManagedObjectContext: self.managedObjectContext];
+    if (model != nil) {
+        model.name = pokemon.pokemonName;
+        model.pokemonId = pokemon.pokemonNumber;
+        model.pokemonURL = pokemon.pokemonImage;
+        [self saveContext];
+    } else {
+        NSLog(@"Error to save Model");
+    }
+}
 
 @end

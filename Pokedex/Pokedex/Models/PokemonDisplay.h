@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIkit.h>
+#import "PokemonMO.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(instancetype)initWithPokemonName:(NSString*)name
                   andPokemonNumber:(NSInteger)number
                    andPokemonImage:(NSString*)image;
+
+-(instancetype)initWithModel:(PokemonMO*)model;
 
 @end
 

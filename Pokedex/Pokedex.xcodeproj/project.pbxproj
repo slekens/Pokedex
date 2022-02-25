@@ -30,6 +30,7 @@
 		2E9CF1BE276AAFC300E2FFED /* PokemonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9CF1BC276AAFC300E2FFED /* PokemonCollectionViewCell.xib */; };
 		2EA61E29276B9FA900F92911 /* PokemonImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA61E28276B9FA900F92911 /* PokemonImage.m */; };
 		2EC6D2022791F9BA0096BD6D /* PokemonDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6D2012791F9BA0096BD6D /* PokemonDisplay.m */; };
+		B8937AE527C957530035A51C /* PokemonMO.m in Sources */ = {isa = PBXBuildFile; fileRef = B8937AE427C957530035A51C /* PokemonMO.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,8 @@
 		2EC6D2002791F9BA0096BD6D /* PokemonDisplay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokemonDisplay.h; sourceTree = "<group>"; };
 		2EC6D2012791F9BA0096BD6D /* PokemonDisplay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PokemonDisplay.m; sourceTree = "<group>"; };
 		2EC6D203279202050096BD6D /* ServicesProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServicesProtocol.h; sourceTree = "<group>"; };
+		B8937AE327C957530035A51C /* PokemonMO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokemonMO.h; sourceTree = "<group>"; };
+		B8937AE427C957530035A51C /* PokemonMO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PokemonMO.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +226,7 @@
 		2E42323327A9A07B00E0CCDE /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				B8937AE227C956F70035A51C /* MOModels */,
 				2E42323427A9A09700E0CCDE /* CoreDataManager.h */,
 				2E42323527A9A09700E0CCDE /* CoreDataManager.m */,
 			);
@@ -275,6 +279,15 @@
 			path = DataModel;
 			sourceTree = "<group>";
 		};
+		B8937AE227C956F70035A51C /* MOModels */ = {
+			isa = PBXGroup;
+			children = (
+				B8937AE327C957530035A51C /* PokemonMO.h */,
+				B8937AE427C957530035A51C /* PokemonMO.m */,
+			);
+			path = MOModels;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -308,6 +321,7 @@
 				TargetAttributes = {
 					2E117555275804C9003473C3 = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1320;
 					};
 				};
 			};
@@ -369,6 +383,7 @@
 				2E632ACB275AAA5C008B794D /* PokemonList.m in Sources */,
 				2EA61E29276B9FA900F92911 /* PokemonImage.m in Sources */,
 				2E11755E275804C9003473C3 /* SceneDelegate.m in Sources */,
+				B8937AE527C957530035A51C /* PokemonMO.m in Sources */,
 				2E42323627A9A09700E0CCDE /* CoreDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -515,6 +530,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3QP7U5GNG3;
@@ -532,7 +548,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.slekens.Pokedex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -542,6 +557,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3QP7U5GNG3;
@@ -559,7 +575,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.slekens.Pokedex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

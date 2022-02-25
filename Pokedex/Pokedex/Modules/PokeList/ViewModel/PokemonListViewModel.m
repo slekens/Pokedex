@@ -44,8 +44,7 @@
                             PokemonDisplay *pokemon = [[PokemonDisplay alloc]initWithPokemonName: pokemonItem.name
                                                                                 andPokemonNumber: pokemonItem.pokemonId
                                                                                  andPokemonImage: pokemonItem.pictures.officialArtwork];
-                            [weakSelf.pokemonList addObject: pokemon];
-                            //[weakSelf.databaseManager createNewEntryWith: pokemon];
+                            [weakSelf.databaseManager saveNewPokemon: pokemon];
                         }
                         dispatch_async(dispatch_get_main_queue(), ^{
                             completionBlock(weakSelf.pokemonList, nil);
@@ -68,7 +67,18 @@
 
 - (void)viewDidLoad {
     self.isFiltered = NO;
-    [self fetchData];
+    [self fetchFromDataBase];
+}
+
+-(void)fetchFromDataBase {
+    self.pokemonList = [self.databaseManager fetchResults];
+    if ([self.pokemonList count] == 0) {
+        [self fetchData];
+    }
+}
+
+-(void)deletePokemons {
+    [self.databaseManager deleteAllPokemons];
 }
 
 -(void)nextDataList {
@@ -104,7 +114,7 @@
             if (error) {
                 [weakSelf.pokemonListView showError: error];
             } else {
-                
+                [weakSelf fetchFromDataBase];
                 [weakSelf.pokemonListView refresh];
             }
         });
