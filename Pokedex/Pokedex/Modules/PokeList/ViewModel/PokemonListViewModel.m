@@ -20,12 +20,12 @@
 
 #pragma mark - Initialization.
 
--(instancetype)initWithService:(WebClient*)client {
+-(instancetype)initWithService:(nonnull WebClient*)client andDatabaseManager:(nonnull CoreDataManager *)manager {
     self = [super init];
     self.service = client;
+    self.databaseManager = manager;
     self.isFiltered = NO;
     self.pokemonList = [[NSMutableArray alloc]init];
-    self.databaseManager = [[CoreDataManager alloc]init];
     return self;
 }
 
@@ -36,15 +36,13 @@
     [self.service fetchList: ^(PokemonList * _Nullable pokemon, NSError * _Nullable error) {
         if (error == nil) {
             weakSelf.pokemonDataList = pokemon;
-            [weakSelf
-                 .service fetchPokemonData: pokemon andBlock: ^(NSArray<Pokemon *> * _Nullable pokemonList, NSError * _Nullable error) {
-                
+            [weakSelf.service fetchPokemonData: pokemon andBlock: ^(NSArray<Pokemon *> * _Nullable pokemonList, NSError * _Nullable error) {
                     if (error == nil) {
                         for (Pokemon *pokemonItem in pokemonList) {
                             PokemonDisplay *pokemon = [[PokemonDisplay alloc]initWithPokemonName: pokemonItem.name
                                                                                 andPokemonNumber: pokemonItem.pokemonId
                                                                                  andPokemonImage: pokemonItem.pictures.officialArtwork];
-                            [weakSelf.databaseManager saveNewPokemon: pokemon];
+                            [weakSelf savePokemon: pokemon];
                         }
                         dispatch_async(dispatch_get_main_queue(), ^{
                             completionBlock(weakSelf.pokemonList, nil);
@@ -70,15 +68,26 @@
     [self fetchFromDataBase];
 }
 
+-(void)savePokemon:(PokemonDisplay*)pokemon {
+    [self.databaseManager saveNewPokemon: pokemon andHandler:^(BOOL isSuccess, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error saved pokemon %@", error.localizedDescription);
+        }
+    }];
+}
+
 -(void)fetchFromDataBase {
-    self.pokemonList = [self.databaseManager fetchResults];
+    __weak PokemonListViewModel *weakSelf = self;
+     [self.databaseManager fetchResults:^(NSMutableArray<PokemonDisplay *> * _Nullable pokemonList, NSError * _Nullable error) {
+        if(error) {
+            NSLog(@"Error fetching from database %@", error.localizedDescription);
+        }
+        weakSelf.pokemonList = pokemonList;
+    }];
     if ([self.pokemonList count] == 0) {
         [self fetchData];
     }
-}
-
--(void)deletePokemons {
-    [self.databaseManager deleteAllPokemons];
+    [self.pokemonListView refresh];
 }
 
 -(void)nextDataList {

@@ -18,3 +18,6 @@ extern NSString *const kMainCellIdentifier;
 
 //Database
 extern NSString *const kDatabaseName;
+
+// Models
+extern NSString *const kDatabasePokemonListModel;

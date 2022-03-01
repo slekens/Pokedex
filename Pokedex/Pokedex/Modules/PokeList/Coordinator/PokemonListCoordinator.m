@@ -15,11 +15,15 @@
 
 -(UIViewController*)start {
     PokemonListViewController* pokemonListController = [[PokemonListViewController alloc]initWithNibName: kMainViewName bundle: [NSBundle mainBundle]];
+    
     ParsingData *parser = [[ParsingData alloc]init];
     WebClient *client = [[WebClient alloc]initWithParser: parser];
-    PokemonListViewModel *viewModel = [[PokemonListViewModel alloc]initWithService: client];
+    CoreDataManager *manager = [[CoreDataManager alloc]init];
+    
+    PokemonListViewModel *viewModel = [[PokemonListViewModel alloc]initWithService: client andDatabaseManager: manager];
     viewModel.pokemonListView = pokemonListController;
     pokemonListController.viewModel = viewModel;
+    
     self.rootController = [[UINavigationController alloc]initWithRootViewController: pokemonListController];
     [self configureNavigationBar];
     return self.rootController;

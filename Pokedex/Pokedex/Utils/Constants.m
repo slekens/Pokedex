@@ -18,3 +18,7 @@ NSString *const kMainCellIdentifier = @"PokemonCellIdentifier";
 
 //Database
 NSString *const kDatabaseName = @"Pokedex";
+
+// Model names
+NSString *const kDatabasePokemonListModel = @"Pokemon";
+

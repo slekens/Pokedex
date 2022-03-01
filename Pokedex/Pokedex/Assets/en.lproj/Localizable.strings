@@ -12,3 +12,6 @@
 // Main labels
 "SearchTitle" = "Search a Pokemon";
 "NumberElements" = "Number of pokemon: %ld";
+
+//Error
+"ErrorNewEntry" = "Saved failed, try again later!";

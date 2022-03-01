@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *title;
 @property(nonatomic, assign)BOOL isFiltered;
 
--(instancetype)initWithService:(WebClient*)client;
+-(instancetype)initWithService:(WebClient*)client andDatabaseManager:(CoreDataManager*)manager;
 
 @end
 

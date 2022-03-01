@@ -90,7 +90,6 @@
 }
 
 -(__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     NSString *cellIdentifier = kMainCellIdentifier;
     PokemonCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: cellIdentifier forIndexPath: indexPath];
     [cell configure: [self.viewModel itemAtIndexPath: indexPath]];

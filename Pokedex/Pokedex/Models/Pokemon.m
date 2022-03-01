@@ -35,4 +35,8 @@
     return self;
 }
 
+-(NSString*)description {
+    return [NSString stringWithFormat: @"Pokemon Name: %@  \nBase Experience: %ld", self.name, self.baseExperience];
+}
+
 @end

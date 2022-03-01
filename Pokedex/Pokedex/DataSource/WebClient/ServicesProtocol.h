@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_END
 typedef void (^PokemonCompletionHandler)(PokemonList * __nullable pokemon, NSError * __nullable error);
 typedef void (^PokemonDataCompletionHandler)(NSArray <Pokemon *>* __nullable pokemonList, NSError * __nullable error);
 
-- (void)fetchList:(PokemonCompletionHandler _Nonnull)completionBlock;
+-(void)fetchList:(PokemonCompletionHandler _Nonnull)completionBlock;
 -(void)fetchPokemonData:(PokemonList * _Nonnull)pokemonlist andBlock:(PokemonDataCompletionHandler _Nonnull)completionBlock;
 
 @end

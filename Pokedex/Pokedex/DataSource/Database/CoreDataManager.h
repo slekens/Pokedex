@@ -15,9 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CoreDataManager : NSObject
 
--(NSMutableArray<PokemonDisplay *>*)fetchResults;
--(void)saveNewPokemon:(PokemonDisplay*)pokemon;
--(void)deleteAllPokemons;
+typedef void (^PokemonListHandler)(NSMutableArray<PokemonDisplay *>* __nullable pokemonList, NSError * __nullable error);
+typedef void (^SaveHandler)(BOOL isSuccess, NSError * __nullable error);
+
+-(void)fetchResults:(PokemonListHandler)completionHandler;
+-(void)saveNewPokemon:(PokemonDisplay*)pokemon andHandler:(SaveHandler)completionHandler;
 
 @end
 

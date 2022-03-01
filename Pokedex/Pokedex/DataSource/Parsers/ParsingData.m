@@ -32,6 +32,7 @@
         pokemon.weight = [response[@"weight"]integerValue];
         pokemon.pictures = [self parsePokemonSprites: response[@"sprites"]];
     }
+    NSLog(@"%@", pokemon);
     return pokemon;
 }
 

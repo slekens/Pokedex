@@ -57,7 +57,7 @@
     NSMutableArray <Pokemon*> *pokemonList = [NSMutableArray array];
     
     __weak WebClient *weakSelf = self;
-    
+
     for (Pokemon *pokemon in pokemonlist.pokemonList) {
         dispatch_group_enter(group);
         NSURL* url = [NSURL URLWithString: pokemon.url];
@@ -75,7 +75,6 @@
     }
 
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        NSLog(@"All pokemons get");
         completionBlock(pokemonList, nil);
     });
 }

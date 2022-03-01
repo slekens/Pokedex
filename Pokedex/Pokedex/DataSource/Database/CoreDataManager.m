@@ -21,8 +21,7 @@
     return self;
 }
 
--(void)setUpCoreDataStack
-{
+-(void)setUpCoreDataStack {
     NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSBundle allBundles]];
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
     
@@ -32,20 +31,14 @@
                               NSMigratePersistentStoresAutomaticallyOption:@YES};
     NSError *error = nil;
     NSPersistentStore *store = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error];
-    if (!store)
-    {
+    if (!store) {
         NSLog(@"Error adding persistent store. Error %@",error);
-
         NSError *deleteError = nil;
-        if ([[NSFileManager defaultManager] removeItemAtURL:url error:&deleteError])
-        {
+        if ([[NSFileManager defaultManager] removeItemAtURL:url error:&deleteError]) {
             error = nil;
             store = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error];
         }
-        
-        if (!store)
-        {
-            // Also inform the user...
+        if (!store) {
             NSLog(@"Failed to create persistent store. Error %@. Delete error %@",error,deleteError);
             abort();
         }
@@ -54,17 +47,17 @@
     self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     self.managedObjectContext.persistentStoreCoordinator = psc;
 }
--(void)saveContext {
+-(void)saveContext:(SaveHandler)completionHandler {
     NSError *error = nil;
     if ([_managedObjectContext hasChanges] && ![_managedObjectContext save:&error]) {
-        NSLog(@"Can't save! %@ %@", error, [error localizedDescription]);
-    } else {
-        NSLog(@"Saved Successfully");
+        completionHandler(NO, error);
+        return;
     }
+    completionHandler(YES, nil);
 }
 
--(void)saveNewPokemon:(PokemonDisplay*)pokemon {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"Pokemon"];
+-(void)saveNewPokemon:(PokemonDisplay*)pokemon andHandler:(nonnull SaveHandler)completionHandler {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: kDatabasePokemonListModel];
     NSPredicate *predicate = [NSPredicate predicateWithFormat: @"pokemonId == %ld", pokemon.pokemonNumber];
     [request setPredicate: predicate];
     
@@ -72,50 +65,64 @@
     NSArray *results = [self.managedObjectContext executeFetchRequest: request error: &error];
 
     if ([results count] == 0) {
-        [self createNewEntryWith: pokemon];
-    } else {
+        [self createNewEntryWith: pokemon andHandler:^(BOOL isSuccess, NSError * _Nullable error) {
+            completionHandler(isSuccess, error);
+        }];
+        return;
+    }
+    if (error != nil) {
         NSLog(@"Error already exists %@", error.localizedDescription);
+        completionHandler(NO, error);
+        return;
     }
 }
 
--(NSMutableArray<PokemonDisplay *>*)fetchResults {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Pokemon"];
+-(void)fetchResults:(PokemonListHandler)completionHandler  {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: kDatabasePokemonListModel];
      
     NSError *error = nil;
     NSArray *results = [self.managedObjectContext executeFetchRequest:request error:&error];
     if (!results) {
         NSLog(@"Error fetching pokemon objects: %@\n%@", [error localizedDescription], [error userInfo]);
-        abort();
+        completionHandler(nil, error);
+        return;
     }
-    NSLog(@"Results %@", results);
     NSMutableArray<PokemonDisplay*>* list = [[NSMutableArray alloc]init];
     for (PokemonMO *result in results) {
         [list addObject: [[PokemonDisplay alloc]initWithModel: result]];
     }
-    return list;
+    completionHandler(list, nil);
 }
 
 -(void)deleteAllPokemons {
     NSFetchRequest * allRecords = [[NSFetchRequest alloc] init];
-    [allRecords setEntity:[NSEntityDescription entityForName: @"Pokemon" inManagedObjectContext: self.managedObjectContext]];
+    [allRecords setEntity:[NSEntityDescription entityForName: kDatabasePokemonListModel inManagedObjectContext: self.managedObjectContext]];
     [allRecords setIncludesPropertyValues:NO];
     NSError * error = nil;
     NSArray * result = [self.managedObjectContext executeFetchRequest: allRecords error: &error];
     for (NSManagedObject *pokemon in result) {
         [self.managedObjectContext deleteObject: pokemon];
     }
-    [self saveContext];
+    [self saveContext:^(BOOL isSuccess, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error deleting data! %@", error.localizedDescription);
+        }
+    }];
 }
 
--(void)createNewEntryWith:(PokemonDisplay*)pokemon {
-    PokemonMO *model = [NSEntityDescription insertNewObjectForEntityForName: @"Pokemon" inManagedObjectContext: self.managedObjectContext];
+-(void)createNewEntryWith:(PokemonDisplay*)pokemon andHandler:(SaveHandler)completionHandler {
+    PokemonMO *model = [NSEntityDescription insertNewObjectForEntityForName: kDatabasePokemonListModel inManagedObjectContext: self.managedObjectContext];
     if (model != nil) {
         model.name = pokemon.pokemonName;
         model.pokemonId = pokemon.pokemonNumber;
         model.pokemonURL = pokemon.pokemonImage;
-        [self saveContext];
+        [self saveContext:^(BOOL isSuccess, NSError * _Nullable error) {
+            completionHandler(isSuccess, error);
+        }];
     } else {
-        NSLog(@"Error to save Model");
+        NSString *description = NSLocalizedString(@"ErrorNewEntry", @"");
+        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : description };
+        completionHandler(NO, [[NSError alloc]initWithDomain: @"" code: 500 userInfo: userInfo]);
     }
 }
 

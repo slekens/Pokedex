@@ -22,4 +22,8 @@
     return self;
 }
 
+-(NSString*)description {
+    return [NSString stringWithFormat: @"List object: %@ and next: %@ with count: %ld", self.pokemonList, self.next, self.count];
+}
+
 @end
