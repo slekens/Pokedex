@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIkit.h>
 #import "PokemonMO.h"
+#import "Pokemon.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
                    andPokemonImage:(NSString*)image;
 
 -(instancetype)initWithModel:(PokemonMO*)model;
+-(instancetype)initWithVO:(Pokemon*)valueObject;
 
 @end
 

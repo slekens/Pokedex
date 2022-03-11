@@ -21,3 +21,5 @@ extern NSString *const kDatabaseName;
 
 // Models
 extern NSString *const kDatabasePokemonListModel;
+extern NSString *const kDatabasePokemonTypeModel;
+

@@ -30,6 +30,8 @@
 		2E9CF1BE276AAFC300E2FFED /* PokemonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E9CF1BC276AAFC300E2FFED /* PokemonCollectionViewCell.xib */; };
 		2EA61E29276B9FA900F92911 /* PokemonImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA61E28276B9FA900F92911 /* PokemonImage.m */; };
 		2EC6D2022791F9BA0096BD6D /* PokemonDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC6D2012791F9BA0096BD6D /* PokemonDisplay.m */; };
+		2EE0168B27D932A9004FB543 /* PokemonTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE0168A27D932A9004FB543 /* PokemonTypes.m */; };
+		2EF1B15527DBC50800805BD6 /* TypeMO.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1B15427DBC50800805BD6 /* TypeMO.m */; };
 		B8937AE527C957530035A51C /* PokemonMO.m in Sources */ = {isa = PBXBuildFile; fileRef = B8937AE427C957530035A51C /* PokemonMO.m */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +80,10 @@
 		2EC6D2002791F9BA0096BD6D /* PokemonDisplay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokemonDisplay.h; sourceTree = "<group>"; };
 		2EC6D2012791F9BA0096BD6D /* PokemonDisplay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PokemonDisplay.m; sourceTree = "<group>"; };
 		2EC6D203279202050096BD6D /* ServicesProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServicesProtocol.h; sourceTree = "<group>"; };
+		2EE0168927D932A9004FB543 /* PokemonTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokemonTypes.h; sourceTree = "<group>"; };
+		2EE0168A27D932A9004FB543 /* PokemonTypes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PokemonTypes.m; sourceTree = "<group>"; };
+		2EF1B15327DBC50800805BD6 /* TypeMO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeMO.h; sourceTree = "<group>"; };
+		2EF1B15427DBC50800805BD6 /* TypeMO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypeMO.m; sourceTree = "<group>"; };
 		B8937AE327C957530035A51C /* PokemonMO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokemonMO.h; sourceTree = "<group>"; };
 		B8937AE427C957530035A51C /* PokemonMO.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PokemonMO.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,6 +204,8 @@
 				2EA61E28276B9FA900F92911 /* PokemonImage.m */,
 				2EC6D2002791F9BA0096BD6D /* PokemonDisplay.h */,
 				2EC6D2012791F9BA0096BD6D /* PokemonDisplay.m */,
+				2EE0168927D932A9004FB543 /* PokemonTypes.h */,
+				2EE0168A27D932A9004FB543 /* PokemonTypes.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -284,6 +292,8 @@
 			children = (
 				B8937AE327C957530035A51C /* PokemonMO.h */,
 				B8937AE427C957530035A51C /* PokemonMO.m */,
+				2EF1B15327DBC50800805BD6 /* TypeMO.h */,
+				2EF1B15427DBC50800805BD6 /* TypeMO.m */,
 			);
 			path = MOModels;
 			sourceTree = "<group>";
@@ -373,10 +383,12 @@
 				2E499E1627C850AF00AE147E /* Pokedex.xcdatamodeld in Sources */,
 				2E4E23C4278F877300AE2F49 /* PokemonListViewModel.m in Sources */,
 				2E11755B275804C9003473C3 /* AppDelegate.m in Sources */,
+				2EE0168B27D932A9004FB543 /* PokemonTypes.m in Sources */,
 				2E9CF1BD276AAFC300E2FFED /* PokemonCollectionViewCell.m in Sources */,
 				2E9CF1B8276A63DC00E2FFED /* ParsingData.m in Sources */,
 				2E3308AF278D04B700484953 /* ImageDownloader.m in Sources */,
 				2E4E23BF278F7CB600AE2F49 /* PokemonListCoordinator.m in Sources */,
+				2EF1B15527DBC50800805BD6 /* TypeMO.m in Sources */,
 				2EC6D2022791F9BA0096BD6D /* PokemonDisplay.m in Sources */,
 				2E11756C275804CA003473C3 /* main.m in Sources */,
 				2E632ACE275AD60E008B794D /* Pokemon.m in Sources */,
@@ -548,6 +560,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.slekens.Pokedex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -575,6 +588,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.slekens.Pokedex;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

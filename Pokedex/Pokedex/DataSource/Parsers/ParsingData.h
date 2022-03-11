@@ -10,6 +10,7 @@
 #import "PokemonList.h"
 #import "Pokemon.h"
 #import "PokemonImage.h"
+#import "PokemonTypes.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

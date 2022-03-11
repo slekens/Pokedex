@@ -15,11 +15,15 @@
 
 @implementation CoreDataManager
 
+#pragma mark - Initialization.
+
 -(instancetype)init {
     self = [super init];
     [self setUpCoreDataStack];
     return self;
 }
+
+#pragma mark - Core Data setup.
 
 -(void)setUpCoreDataStack {
     NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:[NSBundle allBundles]];
@@ -47,18 +51,12 @@
     self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     self.managedObjectContext.persistentStoreCoordinator = psc;
 }
--(void)saveContext:(SaveHandler)completionHandler {
-    NSError *error = nil;
-    if ([_managedObjectContext hasChanges] && ![_managedObjectContext save:&error]) {
-        completionHandler(NO, error);
-        return;
-    }
-    completionHandler(YES, nil);
-}
 
--(void)saveNewPokemon:(PokemonDisplay*)pokemon andHandler:(nonnull SaveHandler)completionHandler {
+#pragma mark - Public
+
+-(void)saveNewPokemon:(Pokemon*)pokemon andHandler:(nonnull SaveHandler)completionHandler {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: kDatabasePokemonListModel];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"pokemonId == %ld", pokemon.pokemonNumber];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"pokemonId == %ld", pokemon.pokemonId];
     [request setPredicate: predicate];
     
     NSError *error = nil;
@@ -79,7 +77,9 @@
 
 -(void)fetchResults:(PokemonListHandler)completionHandler  {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: kDatabasePokemonListModel];
-     
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey: @"pokemonId" ascending: true];
+    request.sortDescriptors = @[descriptor];
+    
     NSError *error = nil;
     NSArray *results = [self.managedObjectContext executeFetchRequest:request error:&error];
     if (!results) {
@@ -87,11 +87,22 @@
         completionHandler(nil, error);
         return;
     }
-    NSMutableArray<PokemonDisplay*>* list = [[NSMutableArray alloc]init];
+    NSMutableArray<Pokemon*>* list = [[NSMutableArray alloc]init];
     for (PokemonMO *result in results) {
-        [list addObject: [[PokemonDisplay alloc]initWithModel: result]];
+        [list addObject: [[Pokemon alloc]initWithModel: result]];
     }
     completionHandler(list, nil);
+}
+
+#pragma mark - Private
+
+-(void)saveContext:(SaveHandler)completionHandler {
+    NSError *error = nil;
+    if ([_managedObjectContext hasChanges] && ![_managedObjectContext save:&error]) {
+        completionHandler(NO, error);
+        return;
+    }
+    completionHandler(YES, nil);
 }
 
 -(void)deleteAllPokemons {
@@ -110,12 +121,16 @@
     }];
 }
 
--(void)createNewEntryWith:(PokemonDisplay*)pokemon andHandler:(SaveHandler)completionHandler {
+-(void)createNewEntryWith:(Pokemon*)pokemon andHandler:(SaveHandler)completionHandler {
     PokemonMO *model = [NSEntityDescription insertNewObjectForEntityForName: kDatabasePokemonListModel inManagedObjectContext: self.managedObjectContext];
     if (model != nil) {
-        model.name = pokemon.pokemonName;
-        model.pokemonId = pokemon.pokemonNumber;
-        model.pokemonURL = pokemon.pokemonImage;
+        model.name = pokemon.name;
+        model.pokemonId = pokemon.pokemonId;
+        model.pokemonURL = pokemon.url;
+        model.oficialArtwork = pokemon.pictures.officialArtwork;
+        model.height = pokemon.height;
+        model.weight = pokemon.weight;
+        model.baseExperience = pokemon.baseExperience;
         [self saveContext:^(BOOL isSuccess, NSError * _Nullable error) {
             completionHandler(isSuccess, error);
         }];

@@ -21,4 +21,4 @@ NSString *const kDatabaseName = @"Pokedex";
 
 // Model names
 NSString *const kDatabasePokemonListModel = @"Pokemon";
-
+NSString *const kDatabasePokemonTypeModel = @"Types";

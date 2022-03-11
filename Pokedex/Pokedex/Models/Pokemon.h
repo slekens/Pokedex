@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import "PokemonImage.h"
+#import "PokemonTypes.h"
+#import "PokemonMO.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,24 +19,23 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)NSInteger baseExperience;
 @property(nonatomic, assign)NSInteger height;
 @property(nonatomic, assign)NSInteger pokemonId;
-@property(nonatomic, assign)BOOL isDefault;
-@property(nonatomic, copy)NSString *locationEncounters;
-@property(nonatomic, assign)NSInteger order;
 @property(nonatomic, assign)NSInteger weight;
 @property(nonatomic, strong)PokemonImage *pictures;
+@property(nonatomic, strong)NSArray<PokemonTypes*> *types;
 
 -(instancetype)initWithName:(NSString*)name
                      andURL:(NSString*)url;
+
 -(instancetype)initWithAll:(NSString*)name
             resourceURL:(NSString*)url
             baseExperience:(NSInteger)experience
                     height:(NSInteger)height
                  pokemonID:(NSInteger)pokemonID
-                 isDefault:(BOOL)isDefault
- locationEncounterResource:(NSString*)locationURL
-                     order:(NSInteger)order
                     weight:(NSInteger)weight
-                   image:(PokemonImage*)pictures;
+                   image:(PokemonImage*)pictures
+                  andTypes:(NSArray<PokemonTypes*>*)types;
+
+-(instancetype)initWithModel:(PokemonMO*)model;
 
 @end
 

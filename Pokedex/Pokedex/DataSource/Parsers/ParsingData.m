@@ -26,11 +26,9 @@
         pokemon.baseExperience = [response[@"base_experience"]integerValue];
         pokemon.height = [response[@"height"]integerValue];
         pokemon.pokemonId = [response[@"id"]integerValue];
-        pokemon.isDefault = [response[@"is_default"]boolValue];
-        pokemon.locationEncounters = response[@"location_area_encounters"];
-        pokemon.order = [response[@"order"]integerValue];
         pokemon.weight = [response[@"weight"]integerValue];
         pokemon.pictures = [self parsePokemonSprites: response[@"sprites"]];
+        pokemon.types = [self parseTypes: response[@"types"]];
     }
     NSLog(@"%@", pokemon);
     return pokemon;
@@ -64,6 +62,20 @@
         }
     }
     return images;
+}
+
+-(NSArray<PokemonTypes*>*)parseTypes:(id)responseObject {
+    NSMutableArray *types = [[NSMutableArray alloc]init];
+    if ([responseObject isKindOfClass: [NSArray class]]) {
+        for(NSDictionary *item in responseObject) {
+            if ([item isKindOfClass: [NSDictionary class]]) {
+                NSDictionary *type = item[@"type"];
+                PokemonTypes *pokeType = [[PokemonTypes alloc]initWithName: type[@"name"]];
+                [types addObject: pokeType];
+            }
+        }
+    }
+    return types;
 }
 
 #pragma mark - Serialize Data.

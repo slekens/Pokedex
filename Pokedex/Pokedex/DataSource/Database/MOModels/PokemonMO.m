@@ -9,6 +9,6 @@
 
 @implementation PokemonMO
 
-@dynamic name, pokemonId, pokemonURL;
+@dynamic name, pokemonId, pokemonURL, height, weight, types, baseExperience, oficialArtwork;
 
 @end

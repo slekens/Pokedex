@@ -52,7 +52,7 @@
 -(void)setupToolBar {
     self.itemCount = [[UILabel alloc]initWithFrame: CGRectZero];
     [self.itemCount setFont: [UIFont systemFontOfSize: 14.0 weight: UIFontWeightLight]];
-    self.itemCount.text = [NSString stringWithFormat: NSLocalizedString(@"NumberElements", ""), self.viewModel.pokemonList.count];
+    self.itemCount.text = [NSString stringWithFormat: NSLocalizedString(@"NumberElements", ""), self.viewModel.pokemonDisplayList.count];
     self.itemCount.textColor = UIColor.systemRedColor;
     self.countItem = [[UIBarButtonItem alloc]initWithCustomView: self.itemCount];
     [self.toolbar setItems: @[self.countItem]];
@@ -102,7 +102,7 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row + 1 == self.viewModel.pokemonList.count) {
+    if (indexPath.row + 1 == self.viewModel.pokemonDisplayList.count) {
         [self.viewModel nextDataList];
     }
 }

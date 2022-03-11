@@ -16,7 +16,7 @@
 
 @implementation PokemonListViewModel
 
-@synthesize title, pokemonList, service, isFiltered;
+@synthesize title, pokemonDisplayList, service, isFiltered;
 
 #pragma mark - Initialization.
 
@@ -25,7 +25,7 @@
     self.service = client;
     self.databaseManager = manager;
     self.isFiltered = NO;
-    self.pokemonList = [[NSMutableArray alloc]init];
+    self.pokemonDisplayList = [[NSMutableArray alloc]init];
     return self;
 }
 
@@ -39,13 +39,10 @@
             [weakSelf.service fetchPokemonData: pokemon andBlock: ^(NSArray<Pokemon *> * _Nullable pokemonList, NSError * _Nullable error) {
                     if (error == nil) {
                         for (Pokemon *pokemonItem in pokemonList) {
-                            PokemonDisplay *pokemon = [[PokemonDisplay alloc]initWithPokemonName: pokemonItem.name
-                                                                                andPokemonNumber: pokemonItem.pokemonId
-                                                                                 andPokemonImage: pokemonItem.pictures.officialArtwork];
-                            [weakSelf savePokemon: pokemon];
+                            [weakSelf savePokemon: pokemonItem];
                         }
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            completionBlock(weakSelf.pokemonList, nil);
+                            completionBlock(weakSelf.pokemonDisplayList, nil);
                         });
                     } else {
                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -68,7 +65,7 @@
     [self fetchFromDataBase];
 }
 
--(void)savePokemon:(PokemonDisplay*)pokemon {
+-(void)savePokemon:(Pokemon*)pokemon {
     [self.databaseManager saveNewPokemon: pokemon andHandler:^(BOOL isSuccess, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error saved pokemon %@", error.localizedDescription);
@@ -78,16 +75,25 @@
 
 -(void)fetchFromDataBase {
     __weak PokemonListViewModel *weakSelf = self;
-     [self.databaseManager fetchResults:^(NSMutableArray<PokemonDisplay *> * _Nullable pokemonList, NSError * _Nullable error) {
+     [self.databaseManager fetchResults:^(NSMutableArray<Pokemon *> * _Nullable pokemonList, NSError * _Nullable error) {
         if(error) {
             NSLog(@"Error fetching from database %@", error.localizedDescription);
         }
-        weakSelf.pokemonList = pokemonList;
+         weakSelf.pokemonDisplayList = [weakSelf convertToDisplay: pokemonList];
     }];
-    if ([self.pokemonList count] == 0) {
+    if ([self.pokemonDisplayList count] == 0) {
         [self fetchData];
     }
     [self.pokemonListView refresh];
+}
+
+-(NSMutableArray<PokemonDisplay*>*)convertToDisplay:(NSArray<Pokemon*>*)list {
+    NSMutableArray<PokemonDisplay*>* displayList = [[NSMutableArray alloc]init];
+    for (Pokemon* item in list) {
+        PokemonDisplay *pokemon = [[PokemonDisplay alloc]initWithVO: item];
+        [displayList addObject: pokemon];
+    }
+    return displayList;
 }
 
 -(void)nextDataList {
@@ -101,7 +107,7 @@
     } else {
         self.isFiltered = YES;
         self.filteredPokemonList = [[NSMutableArray alloc]init];
-        for (PokemonDisplay* pokemon in self.pokemonList) {
+        for (PokemonDisplay* pokemon in self.pokemonDisplayList) {
             NSRange nameRange = [pokemon.pokemonName rangeOfString: searchText options: NSCaseInsensitiveSearch];
             if (nameRange.location != NSNotFound) {
                 [self.filteredPokemonList addObject: pokemon];
@@ -131,24 +137,24 @@
 }
 
 -(nullable PokemonDisplay *)itemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    if (indexPath.row >= self.pokemonList.count) {
+    if (indexPath.row >= self.pokemonDisplayList.count) {
         return nil;
     }
     if (self.isFiltered) {
         return self.filteredPokemonList[indexPath.row];
     } else {
-        return self.pokemonList[indexPath.row];
+        return self.pokemonDisplayList[indexPath.row];
     }
 }
 
 -(nullable PokemonDisplay *)didSelectAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    if (indexPath.row >= self.pokemonList.count) {
+    if (indexPath.row >= self.pokemonDisplayList.count) {
         return nil;
     }
     if (self.isFiltered) {
         return self.filteredPokemonList[indexPath.row];
     } else {
-        return self.pokemonList[indexPath.row];
+        return self.pokemonDisplayList[indexPath.row];
     }
 }
 
@@ -157,7 +163,7 @@
     if (self.isFiltered) {
         return self.filteredPokemonList.count;
     } else {
-        return self.pokemonList.count;
+        return self.pokemonDisplayList.count;
     }
 }
 

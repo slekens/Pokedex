@@ -9,17 +9,17 @@
 #import <CoreData/CoreData.h>
 #import "Constants.h"
 #import "PokemonMO.h"
-#import "PokemonDisplay.h"
+#import "Pokemon.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CoreDataManager : NSObject
 
-typedef void (^PokemonListHandler)(NSMutableArray<PokemonDisplay *>* __nullable pokemonList, NSError * __nullable error);
+typedef void (^PokemonListHandler)(NSMutableArray<Pokemon *>* __nullable pokemonList, NSError * __nullable error);
 typedef void (^SaveHandler)(BOOL isSuccess, NSError * __nullable error);
 
 -(void)fetchResults:(PokemonListHandler)completionHandler;
--(void)saveNewPokemon:(PokemonDisplay*)pokemon andHandler:(SaveHandler)completionHandler;
+-(void)saveNewPokemon:(Pokemon*)pokemon andHandler:(SaveHandler)completionHandler;
 
 @end
 

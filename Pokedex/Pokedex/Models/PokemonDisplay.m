@@ -27,8 +27,15 @@
     self = [super init];
     self.pokemonName = model.name;
     self.pokemonNumber = model.pokemonId;
-    self.pokemonImage = model.pokemonURL;
+    self.pokemonImage = model.oficialArtwork;
     return self;
 }
 
+-(instancetype)initWithVO:(Pokemon *)valueObject {
+    self = [super init];
+    self.pokemonName = valueObject.name;
+    self.pokemonNumber = valueObject.pokemonId;
+    self.pokemonImage = valueObject.pictures.officialArtwork;
+    return self;
+}
 @end
