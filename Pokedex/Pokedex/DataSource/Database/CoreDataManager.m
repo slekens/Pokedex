@@ -94,6 +94,36 @@
     completionHandler(list, nil);
 }
 
+-(PokemonTypes* _Nullable)fetchTypeWithId:(NSInteger)pokemonId {
+    NSFetchRequest *request =  [NSFetchRequest fetchRequestWithEntityName: kDatabasePokemonTypeModel];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"pokemonId == %ld", pokemonId];
+    [request setPredicate: predicate];
+    
+    NSError *error = nil;
+    NSArray *results = [self.managedObjectContext executeFetchRequest: request error: &error];
+    if(!results) {
+        NSLog(@"Error fetching types objects: %@\n%@", [error localizedDescription], [error userInfo]);
+        return nil;
+    }
+    PokemonTypes *type = (PokemonTypes*)results.lastObject;
+    return type;
+}
+
+-(void)saveType:(PokemonTypes*)type andPokemonId:(NSInteger)pokemonId andHandler:(SaveHandler)completionHandler {
+    TypeMO *model = [NSEntityDescription insertNewObjectForEntityForName: kDatabasePokemonTypeModel inManagedObjectContext: self.managedObjectContext];
+    if(model != nil) {
+        model.pokemonId = [NSNumber numberWithInteger: pokemonId];
+        model.name = type.name;
+        [self saveContext:^(BOOL isSuccess, NSError * _Nullable error) {
+            completionHandler(isSuccess, error);
+        }];
+    } else {
+        NSString *description = NSLocalizedString(@"ErrorNewEntry", @"");
+        NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : description };
+        completionHandler(NO, [[NSError alloc]initWithDomain: @"" code: 500 userInfo: userInfo]);
+    }
+}
+
 #pragma mark - Private
 
 -(void)saveContext:(SaveHandler)completionHandler {
@@ -122,6 +152,15 @@
 }
 
 -(void)createNewEntryWith:(Pokemon*)pokemon andHandler:(SaveHandler)completionHandler {
+    
+    for (PokemonTypes* type in pokemon.types) {
+        [self saveType: type andPokemonId: pokemon.pokemonId andHandler:^(BOOL isSuccess, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error saving pokemon type: %@", error.localizedDescription);
+            }
+        }];
+    }
+    
     PokemonMO *model = [NSEntityDescription insertNewObjectForEntityForName: kDatabasePokemonListModel inManagedObjectContext: self.managedObjectContext];
     if (model != nil) {
         model.name = pokemon.name;

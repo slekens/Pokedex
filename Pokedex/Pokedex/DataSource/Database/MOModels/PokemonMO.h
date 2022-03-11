@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)NSInteger baseExperience;
 @property(nonatomic, assign)NSInteger height;
 @property(nonatomic, assign)NSInteger weight;
-@property(nonatomic, assign)NSArray<NSNumber*>* types;
 
 @end
 

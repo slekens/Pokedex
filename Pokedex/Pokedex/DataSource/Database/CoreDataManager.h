@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "PokemonMO.h"
 #import "Pokemon.h"
+#import "TypeMO.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

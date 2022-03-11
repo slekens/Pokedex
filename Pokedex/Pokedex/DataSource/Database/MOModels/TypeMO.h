@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TypeMO : NSManagedObject
 
-@property(nonatomic, assign)NSInteger idType;
+@property(nonatomic, strong)NSNumber* pokemonId;
 @property(nonatomic, strong)NSString* name;
 
 @end

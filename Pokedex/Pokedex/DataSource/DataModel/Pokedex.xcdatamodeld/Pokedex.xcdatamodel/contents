@@ -3,7 +3,6 @@
     <entity name="Pokemon" representedClassName="PokemonMO" syncable="YES">
         <attribute name="baseExperience" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="height" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="idType" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="oficialArtwork" optional="YES" attributeType="String"/>
         <attribute name="pokemonId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -11,11 +10,11 @@
         <attribute name="weight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Types" representedClassName="TypeMO" syncable="YES">
-        <attribute name="idType" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="pokemonId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Pokemon" positionX="-501.9859619140625" positionY="6.2349853515625" width="155.728271484375" height="163"/>
+        <element name="Pokemon" positionX="-501.9859619140625" positionY="6.2349853515625" width="155.728271484375" height="148"/>
         <element name="Types" positionX="-486" positionY="63" width="128" height="59"/>
     </elements>
 </model>

@@ -9,6 +9,6 @@
 
 @implementation TypeMO
 
-@dynamic idType, name;
+@dynamic pokemonId, name;
 
 @end
